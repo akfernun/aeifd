@@ -1,4 +1,0 @@
-ifd
-===
-
-Indianapolis Fire Department

@@ -1,0 +1,31 @@
+<h1>Listing scene_assignments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Scene</th>
+      <th>Asset</th>
+      <th>Arrival time</th>
+      <th>Location</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @scene_assignments.each do |scene_assignment| %>
+      <tr>
+        <td><%= scene_assignment.scene_id %></td>
+        <td><%= Asset.find(scene_assignment.asset_id).name %></td>
+        <td><%= scene_assignment.arrival_time %></td>
+        <td><%= Location.find(scene_assignment.location_id).name %></td>
+        <td><%= link_to 'Show', scene_assignment %></td>
+        <td><%= link_to 'Edit', edit_scene_assignment_path(scene_assignment) %></td>
+        <td><%= link_to 'Destroy', scene_assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Scene assignment', new_scene_assignment_path %>

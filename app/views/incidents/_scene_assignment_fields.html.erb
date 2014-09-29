@@ -1,0 +1,42 @@
+    <div class="#"></div>
+
+<div class="nested-fields">
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+ 				<h3 class="panel-title" style="color:#444">Apparatus</h3>
+			</div>
+<div class="panel-body">
+
+			  <div class="field form-group">
+			  	<%= f.label :arrival_time, "Apparatus", class: 'col-sm-2 control-label' %>
+			  	<div class="col-sm-10">
+			    	<%= f.select :asset_id, options_from_collection_for_select(Asset.all, :id, :name), {}, class: "form-control" %>
+			    </div>
+			  </div>
+			  
+			  <div class="field form-group">
+			    <%= f.label :arrival_time, "Arrival Time", class: 'col-sm-2 control-label' %>
+			    <div class="col-sm-10">
+			    	<%= f.datetime_select :arrival_time, :ampm => true, class: "form-control" %>
+			    </div>
+			  </div>
+			  <div class="field form-group">
+			    <%= f.label :location, "Location", class: 'col-sm-2 control-label'%>
+			  	<div class="col-sm-10">
+			    	<%= f.select :location_id, options_from_collection_for_select(Location.all, :id, :name), {}, class: "form-control" %>
+			    </div>
+			  </div>
+			  <div class="field form-group">
+			    <%= f.label :asset_role, "Role", class: 'col-sm-2 control-label'%>
+			  	<div class="col-sm-10">
+			    	<%= f.select :asset_role_id, options_from_collection_for_select(AssetRole.all, :id, :name), {}, class: "form-control" %>
+			    </div>
+			  </div>
+
+ 			   <%= link_to_remove_association('Remove Apparatus', f,:class => 'btn btn-default form-control') %>
+  		</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @incident.name %>
+</p>
+
+<% @scenes.each do |s| %>
+<p>
+  <strong>Scene:</strong>
+	<%= s.name %>
+</p>
+<% end %>
+<p>
+<%= link_to 'Edit', edit_incident_path(@incident) %> |
+<%= link_to 'Back', incidents_path %>

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Scene:</strong>
+  <%= @scene_assignment.scene_id %>
+</p>
+
+<p>
+  <strong>Asset:</strong>
+  <%= @scene_assignment.asset_id %>
+</p>
+
+<p>
+  <strong>Arrival time:</strong>
+  <%= @scene_assignment.arrival_time %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @scene_assignment.location %>
+</p>
+
+<%= link_to 'Edit', edit_scene_assignment_path(@scene_assignment) %> |
+<%= link_to 'Back', scene_assignments_path %>

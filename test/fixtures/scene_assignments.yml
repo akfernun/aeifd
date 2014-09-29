@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  scene_id: 1
+  asset_id: 1
+  arrival_time: 2014-09-25 18:29:52
+  location: MyString
+
+two:
+  scene_id: 1
+  asset_id: 1
+  arrival_time: 2014-09-25 18:29:52
+  location: MyString

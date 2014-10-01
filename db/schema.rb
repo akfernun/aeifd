@@ -31,10 +31,24 @@ ActiveRecord::Schema.define(version: 20140929180621) do
     t.datetime "updated_at"
   end
 
+  create_table "jobs", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "locations", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "people", force: true do |t|
+    t.string   "name"
+    t.integer  "age"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "job_id"
   end
 
   create_table "scene_assignments", force: true do |t|

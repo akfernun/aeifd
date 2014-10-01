@@ -20,5 +20,10 @@
   <%= @scene_assignment.location %>
 </p>
 
+<p>
+  <strong>Incident ID:</strong>
+  <%= @scene_assignment.scene.incident_id %>
+</p>
+
 <%= link_to 'Edit', edit_scene_assignment_path(@scene_assignment) %> |
 <%= link_to 'Back', scene_assignments_path %>

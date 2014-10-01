@@ -3,6 +3,9 @@
 <table>
   <thead>
     <tr>
+      <th>Incident ID</th>
+      <th>Incident Name</th>
+      <th>Incident Created at:</th>
       <th>Scene</th>
       <th>Asset</th>
       <th>Arrival time</th>
@@ -14,6 +17,9 @@
   <tbody>
     <% @scene_assignments.each do |scene_assignment| %>
       <tr>
+      	<td><%= scene_assignment.scene.incident_id%></td>
+      	<td><%= Incident.find(scene_assignment.scene.incident_id).name %></td>
+      	<td><%= Incident.find(scene_assignment.scene.incident_id).created_at %></td>
         <td><%= scene_assignment.scene_id %></td>
         <td><%= Asset.find(scene_assignment.asset_id).name %></td>
         <td><%= scene_assignment.arrival_time %></td>

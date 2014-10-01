@@ -72,6 +72,6 @@ class ScenesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def scene_params
-      params.require(:scene).permit(:incident_id, :name, :scene_type_id, scene_assignments_attributes: [:id, :scene_id, :asset_id, :arrival_time, :location])
+      params.require(:scene).permit(:incident_id, :name, :scene_type_id, scene_assignments_attributes: [:id, :scene_id, :asset_id, :arrival_time, :location_id, :incident_id])
     end
 end

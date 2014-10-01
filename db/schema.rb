@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 20141001211830) do
     t.datetime "updated_at"
     t.integer  "location_id"
     t.integer  "asset_role_id"
-    t.integer  "incident_id"
   end
 
   create_table "scene_types", force: true do |t|

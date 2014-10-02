@@ -27,11 +27,10 @@ buildings_string = "1 story
 2 story w/ basement
 3 story
 3 story w/ basement
-Industrial
-Single story
-Multi-story
-High rise (4+ stories)
-Strip mall";
+Single story - Industrial
+Multi-story - Industrial
+High rise (4+ stories) - Industrial
+Strip mall - Industrial";
 
 building_types = buildings_string.split("\n");
 

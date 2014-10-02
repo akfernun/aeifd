@@ -10,6 +10,24 @@
   <strong>Scene:</strong>
 	<%= s.name %>
 </p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Log Entries</div>
+	<table class="table">
+		<tr>
+			<td>Date</td>
+			<td>Time</td>
+			<td>Entry</td>
+		</tr>
+		<% @incident.entries.each do |entry| %>
+			<tr>
+				<td><%= entry.created_at.strftime("%m/%d/%Y") %></td> 
+				<td><%= entry.created_at.strftime("%I:%M%p")%></td>
+				<td><%= entry.name %></td>
+			</tr>
+		<% end %>
+	</table>
+  </div>
 <% end %>
 <p>
 <%= link_to 'Edit', edit_incident_path(@incident) %> |

@@ -4,12 +4,8 @@
   <strong>Name:</strong>
   <%= @incident.name %>
 </p>
+ 
 
-<% @scenes.each do |s| %>
-<p>
-  <strong>Scene:</strong>
-	<%= s.name %>
-</p>
 
 <div class="panel panel-default">
   <div class="panel-heading">Log Entries</div>
@@ -28,7 +24,7 @@
 		<% end %>
 	</table>
   </div>
-<% end %>
+
 <p>
 <%= link_to 'Edit', edit_incident_path(@incident) %> |
 <%= link_to 'Back', incidents_path %>

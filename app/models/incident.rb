@@ -5,7 +5,6 @@ class Incident < ActiveRecord::Base
 
   after_create :create_action
   after_update :update_action
-  before_update :count_scenes
   
   #accepts_nested_attributes_for :scenes, :reject_if => lambda { |a| a[:name].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :scenes
@@ -30,12 +29,6 @@ class Incident < ActiveRecord::Base
      
     @scene_entry = Entry.new(incident_id: self.id, name: "Created Scene - #{self.scenes.last.name}")
     @scene_entry.save
-
-
-  end
-  
-  def count_scenes
-    @scene_count = self.scenes.length
   end
 
 end

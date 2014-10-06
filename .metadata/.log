@@ -1,0 +1,83 @@
+!SESSION 2014-10-01 22:44:11.684 -----------------------------------------------
+eclipse.buildId=3.6.0.201407100658
+java.version=1.7.0_65
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.aptana.projects 2 0 2014-10-01 22:46:26.993
+!MESSAGE Internal error: 
+!STACK 1
+org.eclipse.core.runtime.CoreException: 
+	at com.aptana.projects.wizards.AbstractNewProjectWizard$1.run(AbstractNewProjectWizard.java:253)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2345)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2327)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard.doCreateProject(AbstractNewProjectWizard.java:321)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard$2.run(AbstractNewProjectWizard.java:374)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+Caused by: org.eclipse.core.runtime.CoreException: Cloning into 'C:\Users\erics_000\Documents\ifd\Firedepartment'...
+fatal: unable to access 'https://github.iu.edu/orgs/CIT374/': The requested URL returned error: 502
+	at com.aptana.projects.wizards.AbstractNewProjectWizard.doCloneFromGit(AbstractNewProjectWizard.java:698)
+	at com.aptana.ruby.ui.wizards.NewRubyProjectWizard.cloneFromGit(NewRubyProjectWizard.java:145)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard.createNewProject(AbstractNewProjectWizard.java:570)
+	at org.radrails.rails.internal.ui.NewRailsProjectWizard.createNewProject(NewRailsProjectWizard.java:116)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard$1.run(AbstractNewProjectWizard.java:249)
+	... 5 more
+!SUBENTRY 1 com.aptana.projects 4 0 2014-10-01 22:46:26.994
+!MESSAGE 
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cloning into 'C:\Users\erics_000\Documents\ifd\Firedepartment'...
+fatal: unable to access 'https://github.iu.edu/orgs/CIT374/': The requested URL returned error: 502
+	at com.aptana.projects.wizards.AbstractNewProjectWizard.doCloneFromGit(AbstractNewProjectWizard.java:698)
+	at com.aptana.ruby.ui.wizards.NewRubyProjectWizard.cloneFromGit(NewRubyProjectWizard.java:145)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard.createNewProject(AbstractNewProjectWizard.java:570)
+	at org.radrails.rails.internal.ui.NewRailsProjectWizard.createNewProject(NewRailsProjectWizard.java:116)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard$1.run(AbstractNewProjectWizard.java:249)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2345)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2327)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard.doCreateProject(AbstractNewProjectWizard.java:321)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard$2.run(AbstractNewProjectWizard.java:374)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+!SUBENTRY 2 com.aptana.core 4 0 2014-10-01 22:46:26.995
+!MESSAGE Cloning into 'C:\Users\erics_000\Documents\ifd\Firedepartment'...
+fatal: unable to access 'https://github.iu.edu/orgs/CIT374/': The requested URL returned error: 502
+
+!ENTRY com.aptana.projects 2 0 2014-10-01 22:47:19.832
+!MESSAGE Internal error: 
+!STACK 1
+org.eclipse.core.runtime.CoreException: 
+	at com.aptana.projects.wizards.AbstractNewProjectWizard$1.run(AbstractNewProjectWizard.java:253)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2345)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2327)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard.doCreateProject(AbstractNewProjectWizard.java:321)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard$2.run(AbstractNewProjectWizard.java:374)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+Caused by: org.eclipse.core.runtime.CoreException: Cloning into 'C:\Users\erics_000\Documents\ifd\Firedepartment'...
+remote: Repository not found.
+fatal: Authentication failed for 'https://github.iu.edu/CIT374/ifd.git/'
+	at com.aptana.projects.wizards.AbstractNewProjectWizard.doCloneFromGit(AbstractNewProjectWizard.java:698)
+	at com.aptana.ruby.ui.wizards.NewRubyProjectWizard.cloneFromGit(NewRubyProjectWizard.java:145)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard.createNewProject(AbstractNewProjectWizard.java:570)
+	at org.radrails.rails.internal.ui.NewRailsProjectWizard.createNewProject(NewRailsProjectWizard.java:116)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard$1.run(AbstractNewProjectWizard.java:249)
+	... 5 more
+!SUBENTRY 1 com.aptana.projects 4 0 2014-10-01 22:47:19.832
+!MESSAGE 
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cloning into 'C:\Users\erics_000\Documents\ifd\Firedepartment'...
+remote: Repository not found.
+fatal: Authentication failed for 'https://github.iu.edu/CIT374/ifd.git/'
+	at com.aptana.projects.wizards.AbstractNewProjectWizard.doCloneFromGit(AbstractNewProjectWizard.java:698)
+	at com.aptana.ruby.ui.wizards.NewRubyProjectWizard.cloneFromGit(NewRubyProjectWizard.java:145)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard.createNewProject(AbstractNewProjectWizard.java:570)
+	at org.radrails.rails.internal.ui.NewRailsProjectWizard.createNewProject(NewRailsProjectWizard.java:116)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard$1.run(AbstractNewProjectWizard.java:249)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2345)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2327)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard.doCreateProject(AbstractNewProjectWizard.java:321)
+	at com.aptana.projects.wizards.AbstractNewProjectWizard$2.run(AbstractNewProjectWizard.java:374)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+!SUBENTRY 2 com.aptana.core 4 0 2014-10-01 22:47:19.832
+!MESSAGE Cloning into 'C:\Users\erics_000\Documents\ifd\Firedepartment'...
+remote: Repository not found.
+fatal: Authentication failed for 'https://github.iu.edu/CIT374/ifd.git/'

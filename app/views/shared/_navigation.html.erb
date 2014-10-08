@@ -1,8 +1,11 @@
 
       
       <ul class="nav nav-pills nav-stacked">
-		  <li class="btn btn-danger"><%=link_to "Incident", controller: "incidents", action: "new"%></li>
-		  <li> 
+      	<li>
+			<div class="btn-group">
+				<%= link_to 'Incident '.html_safe, root_path, :class => 'btn btn-danger', :style => "color: white", controller: "incidents"%>
+			</div>
+		<li> 
 			<div class="btn-group">
 				<%= link_to 'Create <b class="caret"></b>'.html_safe, root_path,  :'data-toggle' => 'dropdown', :class => 'btn btn-primary dropdown-toggle', :style => "color: white"  %>
 					<ul class="dropdown-menu" role="menu">

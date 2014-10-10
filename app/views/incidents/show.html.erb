@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @incident.name %>
-</p>
+<div class="page-header">
+  <h1><%= @incident.name %> <small>Incident Log</small></h1>
+</div>
  
 
 
@@ -11,14 +10,14 @@
   <div class="panel-heading">Log Entries</div>
 	<table class="table">
 		<tr>
-			<td>Date</td>
-			<td>Time</td>
-			<td>Entry</td>
+			<th>Date</th>
+			<th>Time</th>
+			<th>Entry</th>
 		</tr>
-		<% @incident.entries.each do |entry| %>
+		<% @incident.entries.order("created_at desc").each do |entry| %>
 			<tr>
 				<td><%= entry.created_at.strftime("%m/%d/%Y") %></td> 
-				<td><%= entry.created_at.strftime("%I:%M%p")%></td>
+				<td><%= entry.created_at.strftime("%I:%M%p:%S")%></td>
 				<td><%= entry.name %></td>
 			</tr>
 		<% end %>

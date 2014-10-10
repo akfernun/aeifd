@@ -4,7 +4,7 @@ class Incident < ActiveRecord::Base
   has_many :entries
 
   after_create :create_action
-  after_update :update_action
+  #after_update :update_action
   
   #accepts_nested_attributes_for :scenes, :reject_if => lambda { |a| a[:name].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :scenes
@@ -12,14 +12,14 @@ class Incident < ActiveRecord::Base
   
 
   def create_action
-    @entry = Entry.new(incident_id: self.id, name: "Created Incident - #{self.name}")
+    @entry = Entry.new(incident_id: self.id, name: "Incident: #{self.name} created.")
     @entry.save
     
           
-    self.scenes.each do |scene|
-      @scene_entry = Entry.new(incident_id: self.id, name: "Created Scene - #{scene.name}")
-      @scene_entry.save
-    end
+    #self.scenes.each do |scene|
+    #  @scene_entry = Entry.new(incident_id: self.id, name: "Created Scene - #{scene.name}")
+    #  @scene_entry.save
+    #end
 
   end
 

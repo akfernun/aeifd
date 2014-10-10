@@ -5,7 +5,7 @@
 		<div class="panel panel-default">
 
 			<div class="panel-heading">
- 				<h3 class="panel-title" style="color:#444">Exposure - <%= link_to_remove_association('Remove Scene', f) %></h3>
+ 				<h3 class="panel-title" style="color:#444">Exposure</h3>
 			</div>
 <div class="panel-body">
 
@@ -30,7 +30,7 @@
 	    
   		<div class="panel panel-default">
 			<div class="panel-heading">
- 				<h3 class="panel-title" style="color:#444">Apparatus Assigned to Exposure</h3>
+ 				<h3 class="panel-title" style="color:#444">Apparatus on this Scene</h3>
 			</div>
 			<div class="panel-body">
 				<div class="#">
@@ -42,7 +42,7 @@
 	    		</div>
 	    	</div>
 	    </div>
-
+<%= link_to_remove_association('Remove Scene', f, :class => 'btn btn-default form-control') %>
 	    
 </div>
 </div>

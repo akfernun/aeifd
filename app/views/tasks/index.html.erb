@@ -1,0 +1,36 @@
+<h1>Listing tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Primar search</th>
+      <th>All clear</th>
+      <th>Utilities contacted</th>
+      <th>Safety officer arrived</th>
+      <th>Utilities disconnected</th>
+      <th>Secondary search</th>
+      <th>Fire under control</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.primar_search %></td>
+        <td><%= task.all_clear %></td>
+        <td><%= task.utilities_contacted %></td>
+        <td><%= task.safety_officer_arrived %></td>
+        <td><%= task.utilities_disconnected %></td>
+        <td><%= task.secondary_search %></td>
+        <td><%= task.fire_under_control %></td>
+        <td><%= link_to 'Show', incident_tasks_path(@incident,task) %></td>
+        <td><%= link_to 'Edit', edit_incident_task_path(@incident,task) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Task', new_incident_task_path %>

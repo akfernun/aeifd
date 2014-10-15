@@ -21,6 +21,7 @@ class IncidentsController < ApplicationController
 
   # GET /incidents/1/edit
   def edit
+    @task = @incident.task
   end
 
   # POST /incidents
@@ -29,7 +30,7 @@ class IncidentsController < ApplicationController
     @incident = Incident.new(incident_params)
     respond_to do |format|
       if @incident.save
-        format.html { redirect_to @incident, notice: 'Incident was successfully created.' }
+        format.html { redirect_to edit_incident_path(@incident), notice: 'Incident was successfully created.' }
         format.json { render :show, status: :created, location: @incident }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class IncidentsController < ApplicationController
   def update
     respond_to do |format|
       if @incident.update(incident_params)
-        format.html { redirect_to @incident, notice: 'Incident was successfully updated.' }
+        format.html { redirect_to edit_incident_path(@incident), notice: 'Incident was successfully updated.' }
         format.json { render :show, status: :ok, location: @incident }
       else
         format.html { render :edit }

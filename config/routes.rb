@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+   # resources :tasks
+
   resources :entries
 
   resources :asset_roles
@@ -13,7 +16,9 @@ Rails.application.routes.draw do
 
   resources :assets
 
-  resources :incidents
+  resources :incidents do
+    resources :tasks
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -22,7 +27,7 @@ Rails.application.routes.draw do
   root 'incidents#new'
 
   # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+    #get 'measures/complete' => 'measure#complete'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

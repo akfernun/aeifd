@@ -39,6 +39,33 @@ building_types.each do |type|
 end
 
 
+Location.delete_all
+
+name_string = "North
+South
+East
+West
+";
+
+name_string2 = name_string.split("\n");
+
+name_string2.each do |type|
+	Location.create(name: type);
+end
+
+AssetRole.delete_all
+
+role_string = "Attacking
+Defending
+";
+
+role_string2 = role_string.split("\n");
+
+role_string2.each do |type|
+	AssetRole.create(name: type);
+end
+
+
 
 
 

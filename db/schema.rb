@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141001211830) do
+ActiveRecord::Schema.define(version: 20141015183932) do
 
   create_table "asset_roles", force: true do |t|
     t.string   "name"
@@ -44,6 +44,13 @@ ActiveRecord::Schema.define(version: 20141001211830) do
     t.datetime "updated_at"
   end
 
+  create_table "measures", force: true do |t|
+    t.string   "name"
+    t.boolean  "complete"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "scene_assignments", force: true do |t|
     t.integer  "scene_id"
     t.integer  "asset_id"
@@ -66,6 +73,19 @@ ActiveRecord::Schema.define(version: 20141001211830) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "scene_type_id"
+  end
+
+  create_table "tasks", force: true do |t|
+    t.boolean  "primar_search"
+    t.boolean  "all_clear"
+    t.boolean  "utilities_contacted"
+    t.boolean  "safety_officer_arrived"
+    t.boolean  "utilities_disconnected"
+    t.boolean  "secondary_search"
+    t.boolean  "fire_under_control"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "incident_id"
   end
 
 end

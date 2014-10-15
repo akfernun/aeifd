@@ -1,21 +1,32 @@
-<h1>Listing incidents</h1>
+<div class="page-header">
+  <h1>Listing Incident <small>Log Files</small></h1>
+</div>
 
 <table class="table">
   <thead>
     <tr>
+      <th>Incident Log</th>
+      <th>Date</th>
+	  <th>Time</th>
       <th>Name</th>
-      <th>Scene Type</th>
-      <th colspan="3"></th>
+      <th>Actions</th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @incidents.each do |incident| %>
+    <% @incidents.order("created_at desc").each do |incident| %>
       <tr>
+      	<td><%= link_to 'View Log File', incident_path(incident), :class=>"btn btn-default btn-xs" %></td>
+      	<td><%= incident.created_at.strftime("%m/%d/%Y") %></td> 
+		<td><%= incident.created_at.strftime("%I:%M%p:%S")%></td>
         <td><%= incident.name %></td>
-        <td><%= link_to 'Show', incident %></td>
-        <td><%= link_to 'Edit', edit_incident_path(incident) %></td>
-        <td><%= link_to 'Destroy', incident, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><div class="btn-group">
+        	<%= link_to 'View Incident', incident_path(incident), :class=>"btn btn-default btn-xs"%>
+        	<%= link_to 'Edit Incident', edit_incident_path(incident), :class=>"btn btn-default btn-xs" %>
+        	<%= link_to 'Delete Incident', incident, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-default btn-xs" %>
+        	</div>
+        </td>
       </tr>
     <% end %>
   </tbody>

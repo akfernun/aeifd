@@ -18,7 +18,7 @@
     <% @incidents.order("created_at desc").each do |incident| %>
       <tr>
       	<td><%= link_to 'View Log File', incident_path(incident), :class=>"btn btn-default btn-xs" %></td>
-      	<td><%= incident.created_at.strftime("%m/%d/%Y") %></td> 
+      	<td><%= incident.created_at.strftime("%m/%d/%Y") %></td>
 		<td><%= incident.created_at.strftime("%I:%M%p:%S")%></td>
         <td><%= incident.name %></td>
         <td><div class="btn-group">
@@ -33,5 +33,6 @@
 </table>
 
 <br>
+
 
 <%= link_to 'New Incident', new_incident_path %>

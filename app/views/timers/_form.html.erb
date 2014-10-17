@@ -1,0 +1,46 @@
+<%= form_for(@timer) do |f| %>
+  <% if @timer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@timer.errors.count, "error") %> prohibited this timer from being saved:</h2>
+
+      <ul>
+      <% @timer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :primary_search %><br>
+    <%= f.datetime_select :primary_search %>
+  </div>
+  <div class="field">
+    <%= f.label :all_clear %><br>
+    <%= f.datetime_select :all_clear %>
+  </div>
+  <div class="field">
+    <%= f.label :utilities_contacted %><br>
+    <%= f.datetime_select :utilities_contacted %>
+  </div>
+  <div class="field">
+    <%= f.label :safety_officer_arrived %><br>
+    <%= f.datetime_select :safety_officer_arrived %>
+  </div>
+  <div class="field">
+    <%= f.label :utilities_disconnected %><br>
+    <%= f.datetime_select :utilities_disconnected %>
+  </div>
+  <div class="field">
+    <%= f.label :secondary_search %><br>
+    <%= f.datetime_select :secondary_search %>
+  </div>
+  <div class="field">
+    <%= f.label :fire_under_control %><br>
+    <%= f.datetime_select :fire_under_control %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

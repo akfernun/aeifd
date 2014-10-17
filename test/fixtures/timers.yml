@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  primary_search: 2014-10-16 19:00:59
+  all_clear: 2014-10-16 19:00:59
+  utilities_contacted: 2014-10-16 19:00:59
+  safety_officer_arrived: 2014-10-16 19:00:59
+  utilities_disconnected: 2014-10-16 19:00:59
+  secondary_search: 2014-10-16 19:00:59
+  fire_under_control: 2014-10-16 19:00:59
+  incident_id: 1
+
+two:
+  primary_search: 2014-10-16 19:00:59
+  all_clear: 2014-10-16 19:00:59
+  utilities_contacted: 2014-10-16 19:00:59
+  safety_officer_arrived: 2014-10-16 19:00:59
+  utilities_disconnected: 2014-10-16 19:00:59
+  secondary_search: 2014-10-16 19:00:59
+  fire_under_control: 2014-10-16 19:00:59
+  incident_id: 1

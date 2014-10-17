@@ -3,6 +3,7 @@ class Incident < ActiveRecord::Base
   has_many :scene_assignments
   has_many :entries
   has_one :task
+  has_one :timer
 
   after_create :create_action
   #after_update :update_action
@@ -18,6 +19,15 @@ class Incident < ActiveRecord::Base
 
     @task = Task.new(incident_id: self.id)
     @task.save
+
+    twmin = (20*60)
+    fifmin = (15*60)
+    tenmin = (10*60)
+
+    @timer = Timer.new(incident_id: self.id, primary_search: Time.now+twmin, all_clear: Time.now+fifmin, utilities_contacted: Time.now+tenmin, safety_officer_arrived: Time.now+tenmin)
+
+    @timer.save
+
 
 
     #self.scenes.each do |scene|

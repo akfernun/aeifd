@@ -12,39 +12,39 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field task_fields">
     <%= f.label :primar_search %><br>
     <%= f.check_box :primar_search %>
     <div id="primary_search" class="timer_task" ></div><br>
 
   </div>
-  <div class="field">
+  <div class="field task_fields">
     <%= f.label :all_clear %><br>
     <%= f.check_box :all_clear %>
     <div id="all_clear" class="timer_task" ></div><br>
 
   </div>
-  <div class="field">
+  <div class="field task_fields">
     <%= f.label :utilities_contacted %><br>
     <%= f.check_box :utilities_contacted %>
     <div id="utilities_contacted" class="timer_task" ></div><br>
   </div>
-  <div class="field">
+  <div class="field task_fields">
     <%= f.label :safety_officer_arrived %><br>
     <%= f.check_box :safety_officer_arrived %>
     <div id="safety_officer_arrived" class="timer_task" ></div><br>
   </div>
-  <div class="field">
+  <div class="field task_fields">
     <%= f.label :utilities_disconnected %><br>
     <%= f.check_box :utilities_disconnected %>
     <div id="utilities_disconnected" class="timer_task" ></div><br>
   </div>
-  <div class="field">
+  <div class="field task_fields">
     <%= f.label :secondary_search %><br>
     <%= f.check_box :secondary_search %>
     <div id="secondary_search" class="timer_task" ></div><br>
   </div>
-  <div class="field">
+  <div class="field task_fields">
     <%= f.label :fire_under_control %><br>
     <%= f.check_box :fire_under_control %>
         <div id="fire_under_control" class="timer_task" ></div><br>
@@ -54,3 +54,32 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+<script>
+ $(document).ready(function(){
+
+  var myArray2 = ["task_primar_search", "task_all_clear", "task_utilities_contacted", "task_safety_officer_arrived", "task_utilities_disconnected", "task_secondary_search","task_fire_under_control" ];
+
+    for(var i=0; i<myArray2.length; i++){
+
+      if($("#"+myArray2[i]).prop('checked')){
+        $("#"+myArray2[i]).next().css('display','none');
+      }
+    }
+
+  for(var i=0; i<myArray2.length; i++){
+
+    $("#"+myArray2[i]).click(function(){
+      if($(this).prop('checked')){
+        $(this).next().css('display','none');
+      }else{
+        $(this).next().css('display','block');
+      }
+
+    });
+
+  }
+
+ });
+
+</script>

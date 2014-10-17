@@ -23,6 +23,7 @@ class TasksController < ApplicationController
   # GET /tasks/1/edit
   def edit
     @incident = Incident.find(params[:incident_id])
+    gon.incident = @incident
 
   end
 

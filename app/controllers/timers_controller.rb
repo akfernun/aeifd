@@ -1,5 +1,6 @@
 class TimersController < ApplicationController
-  before_action :set_timer, only: [:show, :edit, :update, :destroy]
+  before_action :set_timer, only: [:edit, :update, :destroy]
+  before_action :set_updated_timer, only: [:show]
 
   # GET /timers
   # GET /timers.json
@@ -19,6 +20,10 @@ class TimersController < ApplicationController
 
   # GET /timers/1/edit
   def edit
+    @timer = Timer.find(params[:id])
+    @incident = Incident.find(@timer.incident_id)
+
+    gon.incident= @incident
   end
 
   # POST /timers
@@ -65,6 +70,10 @@ class TimersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_timer
       @timer = Timer.find(params[:id])
+    end
+
+    def set_updated_timer
+      @timer = Timer.where(incident_id: params[:id])[0]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

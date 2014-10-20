@@ -4,6 +4,7 @@ class Incident < ActiveRecord::Base
   has_many :entries
   has_one :task
   has_one :timer
+  has_many :assets, :through =>  :incident_assignments
 
   after_create :create_action
   #after_update :update_action
@@ -11,6 +12,7 @@ class Incident < ActiveRecord::Base
   #accepts_nested_attributes_for :scenes, :reject_if => lambda { |a| a[:name].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :scenes
   accepts_nested_attributes_for :scene_assignments
+  accepts_nested_attributes_for :incident_assignments
 
 
   def create_action
@@ -27,7 +29,7 @@ class Incident < ActiveRecord::Base
 
     # @timer = Timer.new(incident_id: self.id, primary_search: Time.now+twmin, all_clear: Time.now+fifmin, utilities_contacted: Time.now+tenmin, safety_officer_arrived: Time.now+tenmin)
 
-    @timer = Timer.new(incident_id: self.id, primary_search: Time.now+onemin)
+    @timer = Timer.new(incident_id: self.id, primary_search: Time.now+twmin)
 
 
     @timer.save

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :incident_assignments
+
   resources :timers
 
    # resources :tasks

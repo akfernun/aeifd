@@ -32,10 +32,6 @@ $(document).ready(function(){
         		}
 			}
 
-
-
-
-
         	// $('#all_clear').countdown({until: all_clear , format:'HMS', onExpiry:timerDone });
         	// $('#primary_search').countdown({until: primary_search , format:'HMS', onExpiry:timerDone });
         	// $('#utilities_contacted').countdown({until: utilities_contacted , format:'HMS', onExpiry:timerDone });

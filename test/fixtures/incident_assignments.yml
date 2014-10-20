@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  incident_id: 1
+  location_id: 1
+  asset_role_id: 1
+  asset_id: 1
+
+two:
+  incident_id: 1
+  location_id: 1
+  asset_role_id: 1
+  asset_id: 1

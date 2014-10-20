@@ -22,8 +22,8 @@ class TimersController < ApplicationController
   def edit
     @timer = Timer.find(params[:id])
     @incident = Incident.find(@timer.incident_id)
-
     gon.incident= @incident
+
   end
 
   # POST /timers
@@ -45,6 +45,19 @@ class TimersController < ApplicationController
   # PATCH/PUT /timers/1
   # PATCH/PUT /timers/1.json
   def update
+
+    before_timers = Timer.find(params[:id])
+
+    params[:timer].each do |k,v|
+      if k!="id" || k!="incident_id"
+        if v!=""
+          params[:timer][k] = Time.now+(v.to_i*60)
+        else
+          params[:timer][k] = before_timers[k]
+        end
+      end
+    end
+
     respond_to do |format|
       if @timer.update(timer_params)
         format.html { redirect_to @timer, notice: 'Timer was successfully updated.' }

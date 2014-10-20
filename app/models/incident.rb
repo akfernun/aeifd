@@ -5,6 +5,7 @@ class Incident < ActiveRecord::Base
   has_one :task
   has_one :timer
   has_many :assets, :through =>  :incident_assignments
+  has_many :incident_assignments
 
   after_create :create_action
   #after_update :update_action
@@ -30,10 +31,7 @@ class Incident < ActiveRecord::Base
     # @timer = Timer.new(incident_id: self.id, primary_search: Time.now+twmin, all_clear: Time.now+fifmin, utilities_contacted: Time.now+tenmin, safety_officer_arrived: Time.now+tenmin)
 
     @timer = Timer.new(incident_id: self.id, primary_search: Time.now+twmin)
-
-
     @timer.save
-
 
 
     #self.scenes.each do |scene|

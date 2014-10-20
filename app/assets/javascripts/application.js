@@ -13,8 +13,8 @@
 
 //= require jquery
 //= require jquery_ujs
+//= require cocoon
 //= require jquery.countdown
 //= require turbolinks
-//= require cocoon
 //= require bootstrap-sprockets
 //= require_tree .

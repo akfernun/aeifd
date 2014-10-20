@@ -30,6 +30,8 @@ class IncidentsController < ApplicationController
   # POST /incidents.json
   def create
     @incident = Incident.new(incident_params)
+
+    logger.debug "These are the params #{params[:incident_assignments_attributes]}"
     respond_to do |format|
       if @incident.save
         format.html { redirect_to edit_incident_path(@incident), notice: 'Incident was successfully created.' }
@@ -74,6 +76,6 @@ class IncidentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def incident_params
-      params.require(:incident).permit(:name, scenes_attributes: [:id, :incident_id, :name, :scene_type_id, :_destroy, scene_assignments_attributes: [:id, :incident_id, :scene_id, :asset_id, :arrival_time, :location_id, :asset_role_id]], incident_assignments_attributes: [:incident_id, :location_id, :asset_role_id, :asset_id])
+      params.require(:incident).permit(:name, incident_assignments_attributes: [:id, :incident_id, :location_id, :asset_role_id, :asset_id], scenes_attributes: [:id, :incident_id, :name, :scene_type_id, :_destroy, scene_assignments_attributes: [:id, :incident_id, :scene_id, :asset_id, :arrival_time, :location_id, :asset_role_id]])
     end
 end

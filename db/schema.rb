@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016230059) do
+ActiveRecord::Schema.define(version: 20141020204101) do
 
   create_table "asset_roles", force: true do |t|
     t.string   "name"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20141016230059) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "incident_id"
+  end
+
+  create_table "incident_assignments", force: true do |t|
+    t.integer  "incident_id"
+    t.integer  "location_id"
+    t.integer  "asset_role_id"
+    t.integer  "asset_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "incidents", force: true do |t|

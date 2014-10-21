@@ -5,7 +5,8 @@ class IncidentAssignment < ActiveRecord::Base
 	belongs_to :asset_role
 	belongs_to :asset
 
-	accepts_nested_attributes_for :asset
+	accepts_nested_attributes_for :asset, :allow_destroy => true
+
 
 	before_save :get_incident_id
 	after_create :create_action

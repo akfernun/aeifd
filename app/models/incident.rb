@@ -6,14 +6,15 @@ class Incident < ActiveRecord::Base
   has_one :timer
   has_many :assets, :through =>  :incident_assignments
   has_many :incident_assignments
+  belongs_to :scene_type
 
   after_create :create_action
   #after_update :update_action
 
   #accepts_nested_attributes_for :scenes, :reject_if => lambda { |a| a[:name].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :scenes
-  accepts_nested_attributes_for :scene_assignments
-  accepts_nested_attributes_for :incident_assignments
+  accepts_nested_attributes_for :scenes, :allow_destroy => true
+  accepts_nested_attributes_for :scene_assignments, :allow_destroy => true
+  accepts_nested_attributes_for :incident_assignments, :allow_destroy => true
 
 
   def create_action

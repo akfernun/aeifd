@@ -15,19 +15,16 @@
 	    	<%= f.text_field :name, class: 'form-control' %>
 	    </div>
 	</div>
-	
+
 	<!-- add in the exposure location -->
-	
-	<div class="field form-group">		
+
+	<div class="field form-group">
 	    <%= f.label :scene_type_id, "Structure", class: 'col-sm-2 control-label' %>
-	
+
 		<div class="col-sm-10">
-	  		<%= f.select :scene_type_id, options_from_collection_for_select(SceneType.all, :id, :name), {}, {class: "form-control"} %>
+	  		<%= f.select :scene_type_id, options_from_collection_for_select(SceneType.all, :id, :name,:selected => f.object.scene_type_id), {}, {class: "form-control"} %>
 		</div>
 	</div>
-	
-
-	    
   		<div class="panel panel-default">
 			<div class="panel-heading">
  				<h3 class="panel-title" style="color:#444">Apparatus on this Scene</h3>
@@ -37,13 +34,13 @@
 				    <%= f.fields_for :scene_assignments do |builder| %>
 						<%= render 'scene_assignment_fields', :f => builder %>
 				    <% end %>
-	    
+
 	    			<%= link_to_add_association 'Add Apparatus', f, :scene_assignments, :class => "btn btn-default form-control" %>
 	    		</div>
 	    	</div>
 	    </div>
 <%= link_to_remove_association('Remove Scene', f, :class => 'btn btn-default form-control') %>
-	    
+
 </div>
 </div>
 </div>

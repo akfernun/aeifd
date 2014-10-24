@@ -14,6 +14,7 @@ gem 'autoprefixer-rails'
 
 gem 'jquery-countdown-rails'
 gem 'gon'
+gem 'jquery-turbolinks'
 
 
 gem 'cocoon'

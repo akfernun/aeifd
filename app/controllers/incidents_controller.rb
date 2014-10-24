@@ -1,5 +1,5 @@
 class IncidentsController < ApplicationController
-  before_action :set_incident, only: [:show, :edit, :update, :destroy]
+  before_action :set_incident, only: [:deployRIT, :show, :edit, :update, :destroy]
 
   # GET /incidents
   # GET /incidents.json
@@ -19,10 +19,28 @@ class IncidentsController < ApplicationController
     scenes = @incident.scenes.build
   end
 
+  def deployRIT
+    @rit = IncidentAssignment.where(incident_id: @incident, asset_role_id: 3)
+
+    if @entry = Entry.create(name: "#{@rit[0].asset.name} was deployed. ", incident_id: @incident.id)
+      respond_to do |format|
+      if @incident.save
+        format.html { redirect_to edit_incident_path(@incident), notice: 'Incident was successfully created.' }
+        format.json { render :show, status: :created, location: @incident }
+      else
+        format.html { render :new }
+        format.json { render json: @incident.errors, status: :unprocessable_entity }
+      end
+    end
+    end
+  end
+
   # GET /incidents/1/edit
   def edit
     @task = @incident.task
     gon.incident= @incident
+    @rit2 = IncidentAssignment.where(incident_id: @incident, asset_role_id: 3)
+
 
   end
 

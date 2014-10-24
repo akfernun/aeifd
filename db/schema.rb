@@ -54,13 +54,6 @@ ActiveRecord::Schema.define(version: 20141021193729) do
     t.datetime "updated_at"
   end
 
-  create_table "measures", force: true do |t|
-    t.string   "name"
-    t.boolean  "complete"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "scene_assignments", force: true do |t|
     t.integer  "scene_id"
     t.integer  "asset_id"

@@ -57,6 +57,7 @@ AssetRole.delete_all
 
 role_string = "Attacking
 Defending
+Rapid Intervention Team
 ";
 
 role_string2 = role_string.split("\n");

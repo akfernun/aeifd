@@ -19,8 +19,8 @@ Rails.application.routes.draw do
   resources :scenes
 
   resources :assets
-
   resources :incidents do
+
     resources :tasks
   end
 
@@ -29,13 +29,13 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'incidents#new'
+  get 'incidents/:id/deployRIT', to: 'incidents#deployRIT', :as => "deployRIT"
 
   # Example of regular route:
     #get 'measures/complete' => 'measure#complete'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
+     # get 'incidents/:id/deployRIT', to: 'incident#deployRIT'
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 

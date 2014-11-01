@@ -79,6 +79,9 @@
 
 <script>
 	$(document).ready(function(){
+		var mySelected = $("#incident_battalion_id option:selected").val();
+		$('.ApparatusSelect :not(option[data-battalion='+mySelected+'])').hide(); //hide appropriate options based on selected battalion
+
 		$("#incident_battalion_id").change(function(){
 			var mySelected = $("#incident_battalion_id option:selected").val();
 			$('.ApparatusSelect option[data-battalion]').show(); //shows all of the options
@@ -101,7 +104,6 @@
     			$('.ApparatusSelect').last().children('option[data-battalion='+mySelected+']').first().attr("selected", true);
 
   			});
-
 
 	});
 </script>

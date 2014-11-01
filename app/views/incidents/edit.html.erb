@@ -38,12 +38,19 @@
 						</div>
 					</div>
 					<div class="field form-group">
+	    				<%= f.label :battalion_id, "Battalion", class: 'col-sm-2 control-label' %>
+
+						<div class="col-sm-10">
+		  					<%= f.select :battalion_id, options_from_collection_for_select(Battalion.all, :id, :name,:selected => f.object.battalion_id), {}, {class: "form-control"} %>
+						</div>
+					</div>
+					<div class="field form-group">
 
 						<%= f.fields_for :incident_assignments do |builder| %>
 							<%= render 'incident_assignment_fields',:f => builder, :locals => {:incident_assignment_id => 5 } %>
 				    	<% end %>
 
-				    	<%= link_to_add_association 'Add Apparatus', f, :incident_assignments, :class => "btn btn-default form-control" %>
+				    	<%= link_to_add_association 'Add Apparatus', f, :incident_assignments, :id =>"AddAppLink", :class => "btn btn-default form-control" %>
 					</div>
 
 						<div class="actions">
@@ -69,6 +76,35 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function(){
+		$("#incident_battalion_id").change(function(){
+			var mySelected = $("#incident_battalion_id option:selected").val();
+			$('.ApparatusSelect option[data-battalion]').show(); //shows all of the options
+			$('.ApparatusSelect :not(option[data-battalion='+mySelected+'])').hide(); //hide appropriate options based on selected battalion
+
+			// console.log($('.ApparatusSelect :not(option[data-battalion='+mySelected+'])').first());
+			// $('.ApparatusSelect option[data-battalion='+mySelected+']').first().attr("selected", true);
+
+			$('.ApparatusSelect').each(function(){
+				$(this).children('option[data-battalion='+mySelected+']').first().attr("selected", true);
+			});
+		});
+
+		 $('.panel-body').on('cocoon:after-insert', function(e, insertedItem) {
+    			var mySelected = $("#incident_battalion_id option:selected").val();
+    			$('.ApparatusSelect :not(option[data-battalion='+mySelected+'])').hide();
+
+    			// $('.ApparatusSelect option[data-battalion='+mySelected+']').first().attr("selected", true);
+
+    			$('.ApparatusSelect').last().children('option[data-battalion='+mySelected+']').first().attr("selected", true);
+
+  			});
+
+
+	});
+</script>
 <% end %>
 
 

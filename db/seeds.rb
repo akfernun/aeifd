@@ -8,14 +8,27 @@
 
 Asset.delete_all
 
-apparatus = ['EG29', 'EG53', 'EG54', 'EG61', 'EG62', 'EG63', 'EG64', 'DCEG71', 'L15', 'L19', 'L29', 'L63', 'L64', 'SQ29', 'Tanker 55', 'BG101', 'BG102', 'DCAR71','Safety 06', '1823', '1205', '1103', 'Arson', 'BC12', 'BC13', 'BC14', '1201'];
+apparatus = ['EG29', 'EG53', 'EG54', 'EG61', 'EG62','BC12', 'BC13', 'BC14', '1201','DCEG71', 'L15', 'L19', 'L29', 'L63', 'L64', 'SQ29', 'Tanker 55', 'BG101', 'BG102', 'DCAR71','EG63', 'EG64','Safety 06', '1823', '1205', '1103', 'Arson'];
 
-
+x=1;
 apparatus.each do |name|
 
-	Asset.create(name: name);
+	if(x==4)
+		x=1;
+	end
 
+	Asset.create(name: name, battalion_id: x);
+	x+=1
 end
+
+Battalion.delete_all
+
+batallion = [1,2,3]
+
+batallion.each do |b|
+	Battalion.create(name: b)
+end
+
 
 # populates scene types
 

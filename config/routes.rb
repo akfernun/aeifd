@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :battalions
+
   resources :incident_assignments
 
   resources :timers

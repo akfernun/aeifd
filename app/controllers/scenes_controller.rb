@@ -10,7 +10,7 @@ class ScenesController < ApplicationController
   # GET /scenes/1
   # GET /scenes/1.json
   def show
-    
+
   end
 
   # GET /scenes/new
@@ -28,7 +28,7 @@ class ScenesController < ApplicationController
   def create
     @scene = Scene.new(scene_params)
     @scene.scene_type_id = params[:scene_type_id]
-    
+
     respond_to do |format|
       if @scene.save
         format.html { redirect_to @scene, notice: 'Scene was successfully created.' }
@@ -72,6 +72,6 @@ class ScenesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def scene_params
-      params.require(:scene).permit(:incident_id, :name, :scene_type_id, scene_assignments_attributes: [:id, :scene_id, :asset_id, :arrival_time, :location_id, :incident_id])
+      params.require(:scene).permit(:incident_id,:battalion_id,:name, :scene_type_id, scene_assignments_attributes: [:id, :scene_id, :asset_id, :arrival_time, :location_id, :incident_id])
     end
 end

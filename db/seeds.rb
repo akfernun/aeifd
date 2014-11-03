@@ -34,21 +34,22 @@ end
 
 SceneType.delete_all;
 
-buildings_string = "1 story
-1 story w/ basement
-2 story
-2 story w/ basement
-3 story
-3 story w/ basement
-Single story - Industrial
-Multi-story - Industrial
-High rise (4+ stories) - Industrial
-Strip mall - Industrial";
+buildings_string = "1 story, 1, true
+1 story w/ basement, 1, true
+2 story, 2, false
+2 story w/ basement, 2, true
+3 story, 3, false
+3 story w/ basement, 3, true
+Single story - Industrial, 1, false
+Multi-story - Industrial, 3, false
+High rise (4+ stories) - Industrial, 20, false
+Strip mall - Industrial, 3, false";
 
 building_types = buildings_string.split("\n");
 
 building_types.each do |type|
-	SceneType.create(name: type);
+  building_types_doubleSplit = type.split(",");
+	SceneType.create(name: building_types_doubleSplit[0], floor: building_types_doubleSplit[1], hasBasement: building_types_doubleSplit[2]);
 end
 
 

@@ -45,6 +45,13 @@
 						</div>
 					</div>
 					<div class="field form-group">
+	    				<%= f.label :incident_strategy_id, "Strategy", class: 'col-sm-2 control-label' %>
+
+						<div class="col-sm-10">
+		  					<%= f.select :incident_strategy_id, options_from_collection_for_select(IncidentStrategy.all, :id, :name, :selected => f.object.incident_strategy_id), {}, {class: "form-control"} %>
+						</div>
+					</div>
+					<div class="field form-group">
 
 						<%= f.fields_for :incident_assignments do |builder| %>
 							<%= render 'incident_assignment_fields',:f => builder, :locals => {:incident_assignment_id => 5 } %>  <!-- What is locals?? -->

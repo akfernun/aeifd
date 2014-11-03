@@ -5,6 +5,7 @@ class Scene < ActiveRecord::Base
   belongs_to :incident
   belongs_to :scene_type
   belongs_to :battalion
+  belongs_to :incident_strategy
 
   accepts_nested_attributes_for :scene_assignments, :allow_destroy => true
 

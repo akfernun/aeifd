@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :incident_strategies
+
   resources :battalions
 
   resources :incident_assignments

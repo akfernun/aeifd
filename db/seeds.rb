@@ -54,10 +54,10 @@ end
 
 Location.delete_all
 
-name_string = "North
-South
-East
-West
+name_string = "A
+B
+C
+D
 ";
 
 name_string2 = name_string.split("\n");
@@ -68,8 +68,10 @@ end
 
 AssetRole.delete_all
 
-role_string = "Attacking
-Defending
+role_string = "1st Engine
+2nd Engine
+1st Ladder
+2nd Ladder
 Rapid Intervention Team
 ";
 
@@ -77,6 +79,17 @@ role_string2 = role_string.split("\n");
 
 role_string2.each do |type|
 	AssetRole.create(name: type);
+end
+
+IncidentStrategy.delete_all
+
+strat_string = "Offense
+Defense
+";
+
+strat_string2 = strat_string.split("\n")
+strat_string2.each do |s|
+	IncidentStrategy.create(name:s)
 end
 
 

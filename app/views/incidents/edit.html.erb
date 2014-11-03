@@ -47,7 +47,7 @@
 					<div class="field form-group">
 
 						<%= f.fields_for :incident_assignments do |builder| %>
-							<%= render 'incident_assignment_fields',:f => builder, :locals => {:incident_assignment_id => 5 } %>
+							<%= render 'incident_assignment_fields',:f => builder, :locals => {:incident_assignment_id => 5 } %>  <!-- What is locals?? -->
 				    	<% end %>
 
 				    	<%= link_to_add_association 'Add Apparatus', f, :incident_assignments, :id =>"AddAppLink", :class => "btn btn-default form-control" %>
@@ -64,7 +64,7 @@
 		</div>
 		<div class="col-sm-6">
 			<div class="panel panel-default">
-				<div class="panel-body">
+				<div class="panel-body ScenesContainer">
 					<div class="#">
 					<%= f.fields_for :scenes do |builder| %>
 						<%= render 'scene_fields', :f => builder %>
@@ -101,10 +101,37 @@
 
     			// $('.ApparatusSelect option[data-battalion='+mySelected+']').first().attr("selected", true);
 
-    			$('.ApparatusSelect').last().children('option[data-battalion='+mySelected+']').first().attr("selected", true);
+    			$('.ApparatusSelect').children('option[data-battalion='+mySelected+']').first().attr("selected", true);
 
   			});
 
+
+		  $('.ScenesContainer').on('cocoon:after-insert', function(e, insertedItem) {
+
+    			if(insertedItem[2].className == 'apparatus_contain'){
+    				var mySelectBox = $('.ScenesContainer').find(".newScene").last().find('.ExposureBattalionSelect');
+    				var selectedValue = mySelectBox.children("option:selected").val(); // THIS IS THE BATTALION
+
+    				$('.ScenesContainer').find(".nested-fields").last().find('.SceneApparatusSelect :not(option[data-battalion='+selectedValue+'])').hide();
+
+    				$('.ScenesContainer').find(".nested-fields").last().find('.SceneApparatusSelect option[data-battalion='+selectedValue+']').first().prop("selected", true);
+
+    				$('.ScenesContainer').find(".newScene").last().find('.ExposureBattalionSelect').change(function(){
+
+    					var mySelectBox = $('.ScenesContainer').find(".newScene").last().find('.ExposureBattalionSelect');
+    					var selectedValue = mySelectBox.children("option:selected").val(); // THIS IS THE BATTALION
+
+    					$('.ScenesContainer').find(".newScene").last().find('.ExposureBattalionSelect').closest(".newScene").find('.SceneApparatusSelect').children('option[data-battalion]').show();
+
+
+    					$('.ScenesContainer').find(".newScene").last().find('.ExposureBattalionSelect').closest(".newScene").find('.SceneApparatusSelect').children(':not(option[data-battalion='+selectedValue+'])').hide();
+
+    					$('.ScenesContainer').find(".nested-fields").last().find('.SceneApparatusSelect option[data-battalion='+selectedValue+']').first().prop("selected", true);
+
+    				});
+    			}
+
+  			});
 	});
 </script>
 <% end %>

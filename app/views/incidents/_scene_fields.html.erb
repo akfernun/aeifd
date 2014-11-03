@@ -1,5 +1,5 @@
 <div class="#"></div>
-
+<div class="exposure_contain"></div>
 <div class="nested-fields">
 
 		<div class="panel panel-default">
@@ -7,7 +7,7 @@
 			<div class="panel-heading">
  				<h3 class="panel-title" style="color:#444">Exposure</h3>
 			</div>
-<div class="panel-body">
+<div class="panel-body newScene">
 
 	<div class="field form-group">
 	    <%= f.label :name, "Scene Name", class: 'col-sm-2 control-label' %>
@@ -25,8 +25,15 @@
 	  		<%= f.select :scene_type_id, options_from_collection_for_select(SceneType.all, :id, :name,:selected => f.object.scene_type_id), {}, {class: "form-control"} %>
 		</div>
 	</div>
+	<div class="field form-group">
+	    <%= f.label :battalion_id, "Battalion", class: 'col-sm-2 control-label' %>
+
+		<div class="col-sm-10">
+	  		<%= f.select :battalion_id, options_from_collection_for_select(Battalion.all, :id, :name,:selected => f.object.battalion_id), {}, {class: "ExposureBattalionSelect form-control"} %>
+		</div>
+	</div>
   		<div class="panel panel-default">
-			<div class="panel-heading">
+			<div class="panel-heading ">
  				<h3 class="panel-title" style="color:#444">Apparatus on this Scene</h3>
 			</div>
 			<div class="panel-body">

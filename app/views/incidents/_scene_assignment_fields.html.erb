@@ -1,5 +1,6 @@
-    <div class="#"></div>
-<div class="nested-fields">
+<div class="#"></div>
+<div class="apparatus_contain" style="display:none; visibility:hidden; "></div>
+<div class="nested-fields apparatus_contain">
 	<div class="panel panel-default">
 
 		<div class="panel-heading">
@@ -10,7 +11,9 @@
 		  <div class="field form-group">
 		  	<%= f.label :asset, "Apparatus", class: 'col-sm-2 control-label' %>
 		  	<div class="col-sm-10">
-		    	<%= f.select :asset_id, options_from_collection_for_select(Asset.all, :id, :name, :selected => f.object.asset_id), {}, class: "form-control" %>
+
+
+		    	 <%= f.select :asset_id, options_for_select(Asset.all.map{ |c| [c.name, c.id, {'data-battalion'=>c.battalion_id}] }, :selected => f.object.asset_id),{}, class: "form-control SceneApparatusSelect" %>
 		    </div>
 		  </div>
 

@@ -7,6 +7,7 @@ class Incident < ActiveRecord::Base
   has_many :assets, :through =>  :incident_assignments
   has_many :incident_assignments
   belongs_to :scene_type
+  belongs_to :battalion
 
   after_create :create_action
   #after_update :update_action

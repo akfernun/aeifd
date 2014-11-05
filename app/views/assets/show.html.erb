@@ -1,9 +1,24 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Name:</strong>
+  <strong>Asset:</strong>
   <%= @asset.name %>
 </p>
+<p>
+  <strong>Incident:</strong>
+  <% @asset.incident_assignments.each do |incident_assignment| %>
+  	<%= incident_assignment.incident.name %>
+  <% end %>
+</p>
+<p>
+  <strong>Role:</strong>
+  <% @asset.incident_assignments.each do |incident_assignment| %>
+  	<%= incident_assignment.asset_role.name %>
+  <% end %>
+</p>
+<p>
+  <strong>Location:</strong>
+  <% @asset.incident_assignments.each do |incident_assignment| %>
+  	<%= incident_assignment.location.name %>
+  <% end %>
+</p>
 
-<%= link_to 'Edit', edit_asset_path(@asset) %> |
 <%= link_to 'Back', assets_path %>

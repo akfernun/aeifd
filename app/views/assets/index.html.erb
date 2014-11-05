@@ -4,9 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Role</th>
-      <th>Location</th>
-      <th>Scene</th>
+      <th>Battalion</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,11 +13,7 @@
     <% @assets.each do |asset| %>
       <tr>
         <td><%= asset.name %></td>
-        <% asset.scene_assignments.last(1).each do |scene_assignment| %>
-          <td><%= scene_assignment.asset_role.name %></td>
-          <td><%= scene_assignment.location.name %></td>
-          <td><%= scene_assignment.scene.name %></td>
-        <% end %>
+        <td><%= asset.battalion_id %></td>
         <td><%= link_to 'Show', asset %></td>
         <td><%= link_to 'Edit', edit_asset_path(asset) %></td>
         <td><%= link_to 'Destroy', asset, method: :delete, data: { confirm: 'Are you sure?' } %></td>

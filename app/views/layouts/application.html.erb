@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ifd</title>
+  <title>Indianapolis Fire Department</title>
   <%= include_gon %>
+  <%= favicon_link_tag 'favicon.ico' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag :defaults, :cache => true %>
@@ -16,13 +17,11 @@
           	<%= render 'shared/navigation' %>
         </div>
       </div>
-      <div class="row">
+      <div class="row" style="padding-top:30px;">
         <div class="col-xs-12">
           <%= yield %>
         </div>
       </div>
-      <%= image_tag "counter.gif" %>
-      <%= image_tag "flame.gif" %>
     </div>
 	</div>
   </body>

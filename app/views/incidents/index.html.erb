@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Listing Incident <small>Log Files</small></h1>
+  <h1>Incident Log</h1>
 </div>
 
 <table class="table">
@@ -22,9 +22,9 @@
 		<td><%= incident.created_at.strftime("%I:%M%p:%S")%></td>
         <td><%= incident.name %></td>
         <td><div class="btn-group">
-        	<%= link_to 'View Incident', incident_path(incident), :class=>"btn btn-default btn-xs"%>
-        	<%= link_to 'Edit Incident', edit_incident_path(incident), :class=>"btn btn-default btn-xs" %>
-        	<%= link_to 'Delete Incident', incident, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-default btn-xs" %>
+        	<%= link_to 'View Incident', incident_path(incident), :class=>"btn btn-primary btn-xs"%>
+        	<%= link_to 'Edit Incident', edit_incident_path(incident), :class=>"btn btn-success btn-xs" %>
+        	<%= link_to 'Delete Incident', incident, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs" %>
         	</div>
         </td>
       </tr>
@@ -35,4 +35,4 @@
 <br>
 
 
-<%= link_to 'New Incident', new_incident_path %>
+<%= link_to 'Create New Incident', new_incident_path %>

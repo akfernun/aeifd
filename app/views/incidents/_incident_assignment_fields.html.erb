@@ -9,7 +9,7 @@
           <div class="col-sm-3">
              <% if !@incident.id.blank?  %>
               <% if !@rit2[0].nil? %>
-              <% if f.object.asset_role_id != 3 %>
+              <% if f.object.asset_role_id != 5 %>
               <%= link_to "Deploy RIT", deployRIT_path, :class =>'btn btn-primary btn-xs', :style => "color:white" %>
               <% end %>
             <% end %>

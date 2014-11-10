@@ -31,7 +31,7 @@ class IncidentsController < ApplicationController
   end
 
   def deployRIT
-    @rit = IncidentAssignment.where(incident_id: @incident, asset_role_id: 3)
+    @rit = IncidentAssignment.where(incident_id: @incident, asset_role_id: 5  )
 
     if @entry = Entry.create(name: "#{@rit[0].asset.name} was deployed. ", incident_id: @incident.id)
       respond_to do |format|
@@ -50,7 +50,7 @@ class IncidentsController < ApplicationController
   def edit
     @task = @incident.task
     gon.incident= @incident
-    @rit2 = IncidentAssignment.where(incident_id: @incident, asset_role_id: 3)
+    @rit2 = IncidentAssignment.where(incident_id: @incident, asset_role_id: 5)
 
   end
 

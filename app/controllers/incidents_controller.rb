@@ -1,11 +1,20 @@
 class IncidentsController < ApplicationController
-  before_action :set_incident, only: [:deployRIT, :show, :edit, :update, :destroy]
+  before_action :set_incident, only: [:deployRIT, :sendemail, :show, :edit, :update, :destroy]
 
 
   # GET /incidents
   # GET /incidents.json
   def index
     @incidents = Incident.all
+  end
+
+  def sendemail
+    LogMailer.mailer(@incident).deliver
+
+    respond_to do |format|
+      format.html { redirect_to edit_incident_path(@incident), notice: 'Email was sent' }
+      format.json { render :show, status: :created, location: @incident }
+    end
   end
 
   # GET /incidents/1
@@ -26,14 +35,14 @@ class IncidentsController < ApplicationController
 
     if @entry = Entry.create(name: "#{@rit[0].asset.name} was deployed. ", incident_id: @incident.id)
       respond_to do |format|
-      if @incident.save
-        format.html { redirect_to edit_incident_path(@incident), notice: 'Incident was successfully created.' }
-        format.json { render :show, status: :created, location: @incident }
-      else
-        format.html { render :new }
-        format.json { render json: @incident.errors, status: :unprocessable_entity }
+        if @incident.save
+          format.html { redirect_to edit_incident_path(@incident), notice: 'Incident was successfully created.' }
+          format.json { render :show, status: :created, location: @incident }
+        else
+          format.html { render :new }
+          format.json { render json: @incident.errors, status: :unprocessable_entity }
+        end
       end
-    end
     end
   end
 

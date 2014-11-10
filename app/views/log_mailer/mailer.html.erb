@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+<h1><%= @incident.name %> Log File</h1>
+<table>
+	<tr>
+		<th style="text-align: left;">Date</th>
+		<th style="text-align: left;">Time</th>
+		<th style="text-align: left;">Entry</th>
+	</tr>
+
+<% @entries.order("created_at asc").each do |m|%>
+<tr>
+	<td width="25%" style="text-align:left; "><%= m.created_at.strftime("%m/%d/%Y") %></td>
+	<td width="25%" style="text-align:left; "><%= m.created_at.strftime("%I:%M%p:%S") %></td>
+	<td width="75%" style="text-align:left; "><%= m.name %></td>
+</tr>
+
+
+<% end %>
+
+
+</table>
+
+
+</body>
+</html>

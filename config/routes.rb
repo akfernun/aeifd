@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'incidents#new'
   get 'incidents/:id/deployRIT', to: 'incidents#deployRIT', :as => "deployRIT"
+  get 'incidents/:id/sendemail', to: 'incidents#sendemail', :as => "sendemail"
 
   # Example of regular route:
     #get 'measures/complete' => 'measure#complete'

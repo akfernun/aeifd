@@ -1,9 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <div class="page-header">
-  <h1><%= @incident.name %> <small>Incident Log</small></h1>
+	<div style="float:left;width:80%">
+  		<h1><%= @incident.name %> <small>Incident Log</small></h1>
+  	</div>
+  	<div style="float:right;text-align:right;width:20%;margin:25px 0 0 0" class="btn-group">
+  		<a href="#" onclick="window.print();return false;" class="btn btn-primary">Print Log</a>
+  		<a href=<%= sendemail_path %> class="btn btn-primary">Email Log</a>
+  	</div>
+  	<div style="clear:both;"></div>
 </div>
- 
+
 
 <div class="panel panel-default">
   <div class="panel-heading">Log Entries</div>
@@ -15,7 +22,7 @@
 		</tr>
 		<% @incident.entries.order("created_at desc").each do |entry| %>
 			<tr>
-				<td><%= entry.created_at.strftime("%m/%d/%Y") %></td> 
+				<td><%= entry.created_at.strftime("%m/%d/%Y") %></td>
 				<td><%= entry.created_at.strftime("%I:%M%p:%S")%></td>
 				<td><%= entry.name %></td>
 			</tr>

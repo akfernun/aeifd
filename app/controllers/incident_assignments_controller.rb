@@ -69,6 +69,6 @@ class IncidentAssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def incident_assignment_params
-      params.require(:incident_assignment).permit(:incident_id, :location_id, :asset_role_id, :asset_id, assets_attributes:[:_destroy])
+      params.require(:incident_assignment).permit(:incident_id, :floor, :location_id, :asset_role_id, :asset_id, assets_attributes:[:_destroy])
     end
 end

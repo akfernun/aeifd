@@ -1,5 +1,5 @@
 class IncidentsController < ApplicationController
-  before_action :set_incident, only: [:deployRIT, :sendemail, :show, :edit, :update, :destroy]
+  before_action :set_incident, only: [:deployRIT, :sendemail, :show, :edit, :update, :destroy,:endincident ]
 
 
   # GET /incidents
@@ -16,6 +16,20 @@ class IncidentsController < ApplicationController
       format.html { redirect_to incident_path(@incident), notice: "Email was sent to #{@incident.email_address}." }
       format.json { render :show, status: :created, location: @incident }
     end
+  end
+
+  def endincident
+    @incident.end_time = Time.now
+
+      respond_to do |format|
+        if @incident.save
+          format.html { redirect_to root_path, notice: 'Incident was successfully ended.' }
+          format.json { render :show, status: :created, location: @incident }
+        else
+          format.html { render :new }
+          format.json { render json: @incident.errors, status: :unprocessable_entity }
+        end
+      end
   end
 
   # GET /incidents/1
@@ -105,6 +119,6 @@ class IncidentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def incident_params
-      params.require(:incident).permit(:name,:email_address,:battalion_id,:incident_strategy_id,:scene_type_id, incident_assignments_attributes: [:id, :floor, :incident_id, :location_id, :asset_role_id, :asset_id,:_destroy], scenes_attributes: [:id, :floor, :incident_id,:battalion_id, :name, :scene_type_id, :_destroy, scene_assignments_attributes: [:id, :floor, :incident_id, :scene_id, :asset_id, :arrival_time, :location_id, :asset_role_id, :_destroy]])
+      params.require(:incident).permit(:name,:email_address,:end_time, :battalion_id,:incident_strategy_id,:scene_type_id, incident_assignments_attributes: [:id, :floor, :incident_id, :location_id, :asset_role_id, :asset_id,:_destroy], scenes_attributes: [:id, :floor, :incident_id,:battalion_id, :name, :scene_type_id, :_destroy, scene_assignments_attributes: [:id, :floor, :incident_id, :scene_id, :asset_id, :arrival_time, :location_id, :asset_role_id, :_destroy]])
     end
 end

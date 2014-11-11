@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   root 'incidents#new'
   get 'incidents/:id/deployRIT', to: 'incidents#deployRIT', :as => "deployRIT"
   get 'incidents/:id/sendemail', to: 'incidents#sendemail', :as => "sendemail"
+  get 'incidents/:id/endincident', to: 'incidents#endincident', :as => "endincident"
 
   # Example of regular route:
     #get 'measures/complete' => 'measure#complete'

@@ -1,5 +1,14 @@
 $(document).ready(function(){
 
+     $(".example").TimeCircles({use_background:false, text_size: .15, time: {
+        Days: {color:"#ffffff" },
+        Hours: {color:"#ffffff"},
+        Minutes: {color:"#ffffff"},
+        Seconds: {color:"#ffffff"},
+    }});
+
+
+
 	$.ajax({
         type: "GET",
         dataType: "json",

@@ -5,7 +5,7 @@ class LogMailer < ActionMailer::Base
   def mailer(incident)
   	@entries = incident.entries
   	@incident = incident
-  	@firehouse_email = "fantasy_sluggers@yahoo.com"
+  	@firehouse_email = @incident.email_address
   	mail(to:@firehouse_email, subject: "#{@incident.name} Log File")
 
   end

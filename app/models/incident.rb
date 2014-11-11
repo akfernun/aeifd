@@ -12,6 +12,8 @@ class Incident < ActiveRecord::Base
 
   after_create :create_action
   after_update :update_action
+  
+  attr_accessor :email_address
 
   #accepts_nested_attributes_for :scenes, :reject_if => lambda { |a| a[:name].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :scenes, :allow_destroy => true

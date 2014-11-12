@@ -1,48 +1,88 @@
 $(document).ready(function(){
-    var ending = -15;
 
      $(".example").TimeCircles({use_background:false, text_size: .15, time: {
         Days: {color:"#ffffff" },
         Hours: {color:"#ffffff"},
         Minutes: {color:"#ffffff"},
         Seconds: {color:"#ffffff"}
+    }})
+
+    if($("#primary_search").length){
+        $("#primary_search").TimeCircles({use_background:false, text_size: .15, time: {
+            Days: {color:"#ffffff" },
+            Hours: {color:"#ffffff"},
+            Minutes: {color:"#ffffff"},
+            Seconds: {color:"#ffffff"}
+        }}).addListener(
+            function(unit,value,total){
+                // console.log(total);
+                // console.log(ending);
+                if (total % 10 == 0 ){
+
+                    //$("#primary_search").TimeCircles().stop();
+                    //alert("Primary search has not been completed");
+                    //ajax call here to update when the timer restarted
+
+                }
+            }
+        );
+
+    }
+
+    if($("#secondary_search").length){
+    $("#secondary_search").TimeCircles({use_background:false, text_size: .15, time: {
+        Days: {color:"#ffffff" },
+        Hours: {color:"#ffffff"},
+        Minutes: {color:"#ffffff"},
+        Seconds: {color:"#ffffff"}
     }}).addListener(
         function(unit,value,total){
-            // console.log(total);
-            // console.log(ending);
-            if (total== ending){
-                ending += -15;
-                //alert("15 seconds have passed");
+             console.log(total);
 
+            if (total % 10 == 0){
+
+               // $("#secondary_search").TimeCircles().restart();
+                //alert("Secondary search has not been completed");
                 //ajax call here to update when the timer restarted
 
             }
         }
     );
 
+}
 
 
-	$.ajax({
-        type: "GET",
-        dataType: "json",
-        url: "/timers/"+gon.incident.id,
-        success: function(data){
-        	console.log(data);
-
-        	var primary_search = new Date(data["primary_search"]);
-        	var secondary_search = new Date(data["secondary_search"]);
-
-            $("#primary_search").countdown({until: primary_search, format: "HMS", onExpiry:function(){timerDone("Primary Search")}});
-
-
-            $("#secondary_search").countdown({until: secondary_search, format: "HMS", onExpiry:function(){timerDone("Secondary Search")}});
-
-
+    $("#task_primar_search").click(function(){
+        if($(this).prop("checked")){
+            $("#primary_search").TimeCircles().destroy();
         }
     });
 
-function timerDone(name){
-        alert(name+" time has expired!");
-        // console.log("should be an alert");
-    }
+    $("#task_secondary_search").click(function(){
+        if($(this).prop("checked")){
+            $("#secondary_search").TimeCircles().destroy();
+        }
+
+    });
+
+
+
+// 	$.ajax({
+//         type: "GET",
+//         dataType: "json",
+//         url: "/timers/"+gon.incident.id,
+//         success: function(data){
+
+
+//         }
+//     });
+
+// function timerDone(name){
+//         alert(name+" time has expired!");
+//         // console.log("should be an alert");
+//     }
+
+
+
+
 });

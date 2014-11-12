@@ -12,7 +12,7 @@ class Incident < ActiveRecord::Base
 
   after_create :create_action
   after_update :update_action
-  
+
   attr_accessor :email_address
 
   #accepts_nested_attributes_for :scenes, :reject_if => lambda { |a| a[:name].blank? }, :allow_destroy => true
@@ -25,18 +25,8 @@ class Incident < ActiveRecord::Base
     @entry = Entry.new(incident_id: self.id, name: "Incident: #{self.name} created. Strategy set to #{self.incident_strategy.name}")
     @entry.save
 
-    @task = Task.new(incident_id: self.id)
+    @task = Task.new(incident_id: self.id, primar_search:false, all_clear:false, utilities_contacted:false, safety_officer_arrived:false, utilities_disconnected:false, secondary_search:false, fire_under_control:false)
     @task.save
-
-    twmin = (20*60)
-    fifmin = (15*60)
-    tenmin = (10*60)
-    onemin = (1*60)
-
-    @timer = Timer.new(incident_id: self.id, primary_search: Time.now+onemin, all_clear: Time.now+fifmin, utilities_contacted: Time.now+tenmin, safety_officer_arrived: Time.now+tenmin)
-
-    @timer.save
-
 
 
 

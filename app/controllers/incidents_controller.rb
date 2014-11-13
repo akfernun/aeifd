@@ -20,10 +20,15 @@ class IncidentsController < ApplicationController
 
   def endincident
     @incident.end_time = Time.now
+    t = @incident.end_time - @incident.created_at
+      mm, ss = t.divmod(60)
+      hh, mm = mm.divmod(60)
+      dd, hh = hh.divmod(24)
+    @duration= "%d days, %d hours, %d minutes and %d seconds" % [dd, hh, mm, ss]
 
       respond_to do |format|
         if @incident.save
-          format.html { redirect_to root_path, notice: 'Incident was successfully ended.' }
+          format.html { redirect_to incident_path(@incident), notice: "Incident was successfully ended. Duration:#{@duration} " }
           format.json { render :show, status: :created, location: @incident }
         else
           format.html { render :new }

@@ -5,29 +5,28 @@
 	  </div>
 	</div>
 <% end %>
-<div class="page-header">
-	<div class="col-lg-5">
-  		<h1><%= @incident.name %> <small>Incident Log</small></h1>
-  	</div>
-  	<div class="col-lg-7" style="margin:25px 0 0 0;text-align:right">
-  		<div class="col-sm-6">
-  			<div class="btn-group">
-  				<a href="#" onclick="window.print();return false;" class="btn btn-primary">Print Log</a>
-  				<%= link_to 'Edit Incident', edit_incident_path(@incident), :class => "btn btn-primary" %> 
-  			</div>
-  		 </div>
-  		 <div class="col-sm-6">
-  		 	<div class="input-group">
-			  	<%= form_tag({:controller=>"incidents", :action=>"sendemail"}, method: :get) do %>
-				  <%= text_field_tag :email_address, nil, :class => 'form-control' %>
-				  <span class="input-group-btn">
-				  	<%= submit_tag 'Email Log', :class => "btn btn-primary" %>
-				  </span>
-				<% end %>
+<div class="page-header row">
+	<div class="col-sm-6">
+		<h1><%= @incident.name %> <small>Incident Log</small></h1>
+	</div>
+
+		<div class="col-sm-6">
+			<div class="form-inline" style="margin:25px 0 0 0">
+
+		  		<a href="#" onclick="window.print();return false;" class="btn btn-primary">Print Log</a>
+		  		<%= link_to 'Edit Incident', edit_incident_path(@incident), :class => "btn btn-primary" %>
+
+				 <div class="input-group">
+				  	<%= form_tag({:controller=>"incidents", :action=>"sendemail"}, method: :get) do %>
+					  <%= text_field_tag :email_address, nil, :class => 'form-control' %>
+					  <span class="input-group-btn">
+					  	<%= submit_tag 'Email Log', :class => "btn btn-primary" %>
+					  </span>
+					<% end %>
+				</div>
 			</div>
-		  </div>
-  	</div>
-  	<div style="clear:both;"></div>
+		</div>
+
 </div>
 
 
@@ -50,5 +49,4 @@
   </div>
 
 <p>
-|
-<%= link_to 'Back', incidents_path %>
+<%= link_to 'Back', incidents_path, :class => "btn btn-primary" %>

@@ -43,7 +43,13 @@ class Incident < ActiveRecord::Base
 
 
     if self.end_time != nil
-      @entry = Entry.new(incident_id: self.id, name: "Incident has ended.")
+      t = self.end_time - self.created_at
+      mm, ss = t.divmod(60)
+      hh, mm = mm.divmod(60)
+      dd, hh = hh.divmod(24)
+      @duration= "%d days, %d hours, %d minutes and %d seconds" % [dd, hh, mm, ss]
+
+      @entry = Entry.new(incident_id: self.id, name: "Incident has ended. Duration: #{@duration}")
       @entry.save
     end
 

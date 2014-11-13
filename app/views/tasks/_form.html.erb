@@ -20,7 +20,7 @@
       formatted_date = @incident.created_at.strftime('%Y-%m-%d');
     %>
 
-    <% unless @task.primar_search == true %>
+    <% if @task.primar_search == false and @incident.end_time.blank? %>
     <div id="primary_search" data-date=<%= formatted_date %>&#32;<%= formatted_time %> class="timer_task" ></div><br>
     <% end %>
 
@@ -57,7 +57,7 @@
     %>
 
 
-    <% if @task.secondary_search == false and @task.primar_search == true  %>
+    <% if @task.secondary_search == false and @task.primar_search == true and @incident.end_time.blank? %>
         <div id="secondary_search" data-date=<%= formatted_date2 %>&#32;<%= formatted_time2 %> class="timer_task" ></div><br>
     <% end %>
 

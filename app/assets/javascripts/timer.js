@@ -1,11 +1,12 @@
 $(document).ready(function(){
-
-     $(".example").TimeCircles({use_background:false, text_size: .15, time: {
-        Days: {color:"#ffffff" },
-        Hours: {color:"#ffffff"},
-        Minutes: {color:"#ffffff"},
-        Seconds: {color:"#ffffff"}
-    }})
+    if ($(".example").length){
+         $(".example").TimeCircles({use_background:false, text_size: .15, time: {
+            Days: {color:"#ffffff" },
+            Hours: {color:"#ffffff"},
+            Minutes: {color:"#ffffff"},
+            Seconds: {color:"#ffffff"}
+        }});
+    }
 
     if($("#primary_search").length){
         $("#primary_search").TimeCircles({use_background:false, text_size: .15, time: {
@@ -41,7 +42,8 @@ $(document).ready(function(){
             if (total % 10 == 0){
 
                // $("#secondary_search").TimeCircles().restart();
-                //alert("Secondary search has not been completed");
+                // alert("Secondary search has not been completed");
+                // console.log("something");
                 //ajax call here to update when the timer restarted
 
             }
@@ -61,6 +63,17 @@ $(document).ready(function(){
         if($(this).prop("checked")){
             $("#secondary_search").TimeCircles().destroy();
         }
+
+    });
+
+    $("#endincidentbutton").click(function(e){
+        e.preventDefault();
+       var endincidentpath = $(this).attr("href");
+       console.log(endincidentpath);
+
+
+       $('.example').TimeCircles().destroy();
+       window.location.href = endincidentpath;
 
     });
 

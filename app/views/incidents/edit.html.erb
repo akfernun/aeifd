@@ -5,17 +5,27 @@
 
 	<div class="col-lg-9">
 		<div class="col-sm-6">
+
+		<% logger.debug " This is the endtime #{@incident.end_time.blank?}" %>
 			<%
 				formatted_time = @incident.created_at.strftime('%H:%M:%S');
 				formatted_date = @incident.created_at.strftime('%Y-%m-%d');
 			 %>
-			<div class="example" style="height:50px;" data-date=<%= formatted_date %>&#32;<%= formatted_time %>></div>
+
+			 <% if @incident.end_time.blank?  %>
+				<div class="example" style="height:50px;" data-date=<%= formatted_date %>&#32;<%= formatted_time %>></div>
+			<% else %>
+				<div style="margin-top: 30px;">Incident ended on <%= @incident.end_time.strftime('%Y-%m-%d at %I:%M%p') %></div>
+			<% end %>
 		</div>
 
 		<div class="col-sm-6" style="margin:20px 0 0 0; text-align:right">
+
+			<% if @incident.end_time.blank? %>
 			<%= link_to 'View Benchmarks'.html_safe, edit_incident_task_path(@incident,@task.id), :class => 'btn btn-primary btn-sm', :style => "color: white;"  %>
 
-			<%= link_to 'End Incident'.html_safe, endincident_path(@incident), :class => 'btn btn-danger btn-sm', :style => "color: white;"  %>
+			<%= link_to 'End Incident'.html_safe, endincident_path(@incident), :class => 'btn btn-danger btn-sm', :style => "color: white;", :id => "endincidentbutton"  %>
+			<% end %>
 
 			<%= link_to 'View Log File'.html_safe, incident_path(@incident), :class => 'btn btn-primary btn-sm', :style => "color: white;"  %>
 		</div>
@@ -84,7 +94,11 @@
 					</div>
 
 						<div class="actions">
+						<% if @incident.end_time.blank? %>
 	    					<%= f.submit :class=>"btn btn-primary" %>
+	    				<% else %>
+	    					<%= f.submit :class=>"btn btn-primary disabled" %>
+	    				<% end %>
 						</div>
 
 				</div>

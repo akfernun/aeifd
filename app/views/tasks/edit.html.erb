@@ -4,9 +4,13 @@
 	formatted_time = @incident.created_at.strftime('%H:%M:%S');
 	formatted_date = @incident.created_at.strftime('%Y-%m-%d');
  %>
+ <% if @incident.end_time.blank?  %>
 <div class="col-sm-6">
 	<div class="example" style="height:75px; float:right;" data-date=<%= formatted_date %>&#32;<%= formatted_time %>></div>
 </div>
+<% else %>
+<div style="margin-top: 30px;">Incident ended on <%= @incident.end_time.strftime('%Y-%m-%d at %I:%M%p') %></div>
+<% end %>
 </div>
 
 
@@ -14,5 +18,4 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', incident_tasks_path(@incident,@task) %> |
-<%= link_to 'Back', root_path %>
+<%= link_to 'Back', edit_incident_path(@incident), :class => "btn btn-primary" %>

@@ -39,10 +39,10 @@
 			<th>Time</th>
 			<th>Entry</th>
 		</tr>
-		<% @incident.entries.order("created_at desc").each do |entry| %>
+		<% @incident.entries.order("created_at ASC").each do |entry| %>
 			<tr>
 				<td><%= entry.created_at.strftime("%m/%d/%Y") %></td>
-				<td><%= entry.created_at.strftime("%I:%M%p:%S")%></td>
+				<td><%= entry.created_at.strftime("%I:%M:%S%p")%></td>
 				<td><%= entry.name %></td>
 			</tr>
 		<% end %>

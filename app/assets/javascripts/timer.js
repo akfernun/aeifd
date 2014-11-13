@@ -19,8 +19,7 @@ $(document).ready(function(){
                 // console.log(ending);
                 if (total % 10 == 0 ){
 
-                    //$("#primary_search").TimeCircles().stop();
-                    //alert("Primary search has not been completed");
+                    alert("Primary search has not been completed");
                     //ajax call here to update when the timer restarted
 
                 }
@@ -42,7 +41,7 @@ $(document).ready(function(){
             if (total % 10 == 0){
 
                // $("#secondary_search").TimeCircles().restart();
-                //alert("Secondary search has not been completed");
+                alert("Secondary search has not been completed");
                 //ajax call here to update when the timer restarted
 
             }

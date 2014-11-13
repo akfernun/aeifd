@@ -12,6 +12,7 @@ class Incident < ActiveRecord::Base
 
   after_create :create_action
   after_update :update_action
+  before_update :before_update
 
   attr_accessor :email_address
 
@@ -38,11 +39,26 @@ class Incident < ActiveRecord::Base
   end
 
   def update_action
-    @entry = Entry.new(incident_id: self.id, name: "Updated Incident - #{self.name}. Strategy is #{self.incident_strategy.name}")
-    @entry.save
+    @after = Incident.find(self.id)
 
-    # @scene_entry = Entry.new(incident_id: self.id, name: "Created Scene - #{self.scenes.last.name}")
-    # @scene_entry.save
+
+    if self.end_time != nil
+      @entry = Entry.new(incident_id: self.id, name: "Incident has ended.")
+      @entry.save
+    end
+
+    self.attributes.each do |k,v|
+      unless k=="id" or k == "id" or k=="updated_at" or k=="created_at" or k=="end_time"
+        unless v == @@before[k]
+            @entry = Entry.new(incident_id: self.id, name: "#{k} was changed.")
+            @entry.save
+        end
+      end
+    end
+  end
+
+  def before_update
+    @@before = Incident.find(self.id)
   end
 
 end

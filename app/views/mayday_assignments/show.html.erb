@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Mayday:</strong>
+  <%= @mayday_assignment.mayday_id %>
+</p>
+
+<p>
+  <strong>Asset:</strong>
+  <%= @mayday_assignment.asset_id %>
+</p>
+
+<%= link_to 'Edit', edit_mayday_assignment_path(@mayday_assignment) %> |
+<%= link_to 'Back', mayday_assignments_path %>

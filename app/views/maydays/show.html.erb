@@ -1,0 +1,19 @@
+<% if notice %>
+	<div class="panel panel-default">
+	  <div class="panel-body">
+	    <span id="notice"><%= notice %></span>
+	  </div>
+	</div>
+<% end %>
+<div class="page-header row">
+	<div class="col-sm-6">
+		<h1><%= @mayday.name %> <small>Incident Log</small></h1>
+	</div>
+
+<p>
+  <strong>Incident assignment:</strong>
+  <%= @mayday.incident_assignment_id %>
+</p>
+
+<%= link_to 'Edit', edit_mayday_path(@mayday) %> |
+<%= link_to 'Back', edit_incident_path(@incident) %>

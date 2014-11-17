@@ -52,35 +52,40 @@
 	</div>
 	<div class="panel-body">
 
+
+	<% if !@maydays.blank? %>
+		<div class="col-sm-5">
+	<% else %>
 		<div class="col-sm-6">
+	<% end %>
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="field form-group">
-						<%= f.label :name, "Incident Name", class: 'col-sm-2 control-label' %>
+						<%= f.label :name, "Incident Name", class: 'col-sm-3 control-label' %>
 
-						<div class="col-sm-10">
+						<div class="col-sm-9">
 							<%= f.text_field :name, class: 'form-control' %>
 						</div>
 
 					</div>
 					<div class="field form-group">
-					    <%= f.label :scene_type_id, "Structure", class: 'col-sm-2 control-label' %>
+					    <%= f.label :scene_type_id, "Structure", class: 'col-sm-3 control-label' %>
 
-						<div class="col-sm-10">
+						<div class="col-sm-9">
 					  		<%= f.select :scene_type_id, options_from_collection_for_select(SceneType.all, :id, :name,:selected => f.object.scene_type_id), {}, {class: "form-control"} %>
 						</div>
 					</div>
 					<div class="field form-group">
-	    				<%= f.label :battalion_id, "Battalion", class: 'col-sm-2 control-label' %>
+	    				<%= f.label :battalion_id, "Battalion", class: 'col-sm-3 control-label' %>
 
-						<div class="col-sm-10">
+						<div class="col-sm-9">
 		  					<%= f.select :battalion_id, options_from_collection_for_select(Battalion.all, :id, :name,:selected => f.object.battalion_id), {}, {class: "form-control"} %>
 						</div>
 					</div>
 					<div class="field form-group">
-	    				<%= f.label :incident_strategy_id, "Strategy", class: 'col-sm-2 control-label' %>
+	    				<%= f.label :incident_strategy_id, "Strategy", class: 'col-sm-3 control-label' %>
 
-						<div class="col-sm-10">
+						<div class="col-sm-9">
 		  					<%= f.select :incident_strategy_id, options_from_collection_for_select(IncidentStrategy.all, :id, :name, :selected => f.object.incident_strategy_id), {}, {class: "form-control"} %>
 						</div>
 					</div>
@@ -104,8 +109,15 @@
 				</div>
 			</div>
 		</div>
+			<% if !@maydays.blank? %>
+		<div class="col-sm-5">
+	<% else %>
 		<div class="col-sm-6">
+	<% end %>
 			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title" style="color:black">Exposures</h3>
+				</div>
 				<div class="panel-body ScenesContainer">
 					<div class="#">
 					<%= f.fields_for :scenes do |builder| %>
@@ -116,8 +128,25 @@
 				</div>
 			</div>
 		</div>
+			<% if !@maydays.blank? %>
+				<div class="col-sm-2">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title" style="color:black">Maydays</h3>
+					</div>
+					<div class="panel-body">
+						<% @maydays.each do |m| %>
+								<%= link_to "#{m.name}", edit_mayday_path(m.id), :class => "btn btn-default btn-sm" %><BR>
+						<% end %>
+					</div>
+				</div>
+			<% end %>
+		</div>
 	</div>
 </div>
+
+
+
 
 <script>
 	$(document).ready(function(){

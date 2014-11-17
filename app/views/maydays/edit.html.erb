@@ -1,0 +1,55 @@
+<div class="row">
+	<div class="col-lg-9">
+		<h3 class="title">Editing <%= @mayday.name %></h3>
+	</div>
+
+	<div class="col-lg-3" style="margin:25px 0 0 0; text-align:right">
+		<%= link_to 'View Mayday Log', @mayday, :class => "btn btn-primary btn-sm" %> 
+		<%= link_to 'Back to Incident', edit_incident_path(@incident), :class => "btn btn-primary btn-sm" %>
+	</div>
+</div>
+
+<%= form_for(@mayday) do |f| %>
+  <% if @mayday.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mayday.errors.count, "error") %> prohibited this mayday from being saved:</h2>
+
+      <ul>
+      <% @mayday.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Mayday</h3>
+      </div>
+      <div class="panel-body">
+        <div class="col-sm-6">
+          <div class="field form-group">
+              <%= f.label :code, "Code", class: 'col-sm-3 control-label' %>
+
+            <div class="col-sm-9">
+                <%= f.select :code, [ '700', '701', '702' ], {}, {class: "form-control"} %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="field form-group">
+
+            <%= f.fields_for :mayday_assignments do |builder| %>
+              <%= render 'mayday_assignment_fields',:f => builder %>  <!-- What is locals?? -->
+              <% end %>
+
+              <%= link_to_add_association 'Add Apparatus', f, :mayday_assignments, :id =>"AddAppLink", :class => "btn btn-default form-control" %>
+          </div>
+        </div>
+        <div class="actions">
+          <%= f.submit :class=>"btn btn-primary" %>
+        </div>
+  </div>
+<% end %>

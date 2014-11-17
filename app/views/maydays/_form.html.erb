@@ -1,0 +1,18 @@
+<%= form_for(@mayday) do |f| %>
+  <% if @mayday.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mayday.errors.count, "error") %> prohibited this mayday from being saved:</h2>
+
+      <ul>
+      <% @mayday.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

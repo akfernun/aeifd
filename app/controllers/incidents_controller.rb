@@ -53,9 +53,15 @@ class IncidentsController < ApplicationController
   def deployRIT
     @rit = IncidentAssignment.where(incident_id: @incident, asset_role_id: 5  )
 
-    if @entry = Entry.create(name: "#{@rit[0].asset.name} was deployed. ", incident_id: @incident.id)
-      respond_to do |format|
-        if @incident.save
+    mayday_incident_assignment_id = params[:incident_assignment_id]
+
+    mayday = Mayday.create(incident_assignment_id: mayday_incident_assignment_id, name: "Mayday for #{IncidentAssignment.find(mayday_incident_assignment_id).asset.name}")
+    #mayday.save
+
+    @rit.first.update_attribute(:asset_role_id, 6)
+  
+    respond_to do |format|
+        if mayday.save
           format.html { redirect_to edit_incident_path(@incident), notice: 'Incident was successfully created.' }
           format.json { render :show, status: :created, location: @incident }
         else
@@ -63,7 +69,20 @@ class IncidentsController < ApplicationController
           format.json { render json: @incident.errors, status: :unprocessable_entity }
         end
       end
-    end
+
+    #logger.debug "***********************the incident for #{mayday_incident_assignment_id} is #{IncidentAssignment.find(mayday_incident_assignment_id).incident_id}"
+
+    #if @entry = Entry.create(name: "#{@rit[0].asset.name} was deployed. ", incident_id: @incident.id)
+    #  respond_to do |format|
+    #    if @incident.save
+    #      format.html { redirect_to edit_incident_path(@incident), notice: 'Incident was successfully created.' }
+    #      format.json { render :show, status: :created, location: @incident }
+    #    else
+    #      format.html { render :new }
+    #      format.json { render json: @incident.errors, status: :unprocessable_entity }
+    #    end
+    #  end
+    #end
   end
 
   # GET /incidents/1/edit
@@ -71,6 +90,7 @@ class IncidentsController < ApplicationController
     @task = @incident.task
     gon.incident= @incident
     @rit2 = IncidentAssignment.where(incident_id: @incident, asset_role_id: 5)
+    @maydays = Mayday.where(incident_assignment_id: @incident.incident_assignments)
 
   end
 

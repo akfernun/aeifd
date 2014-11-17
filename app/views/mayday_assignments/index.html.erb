@@ -1,0 +1,27 @@
+<h1>Listing mayday_assignments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mayday</th>
+      <th>Asset</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mayday_assignments.each do |mayday_assignment| %>
+      <tr>
+        <td><%= mayday_assignment.mayday_id %></td>
+        <td><%= mayday_assignment.asset_id %></td>
+        <td><%= link_to 'Show', mayday_assignment %></td>
+        <td><%= link_to 'Edit', edit_mayday_assignment_path(mayday_assignment) %></td>
+        <td><%= link_to 'Destroy', mayday_assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mayday assignment', new_mayday_assignment_path %>

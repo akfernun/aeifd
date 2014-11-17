@@ -1,0 +1,25 @@
+<%= form_for(@mayday_assignment) do |f| %>
+  <% if @mayday_assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mayday_assignment.errors.count, "error") %> prohibited this mayday_assignment from being saved:</h2>
+
+      <ul>
+      <% @mayday_assignment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :mayday_id %><br>
+    <%= f.number_field :mayday_id %>
+  </div>
+  <div class="field">
+    <%= f.label :asset_id %><br>
+    <%= f.number_field :asset_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

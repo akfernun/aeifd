@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :mayday_assignments
+
+  resources :maydays
+
   resources :incident_strategies
 
   resources :battalions
-
-  resources :incident_assignments
 
   resources :timers
 
@@ -21,10 +23,9 @@ Rails.application.routes.draw do
   resources :scene_assignments
 
   resources :scenes
-
+    resources :incident_assignments
   resources :assets
   resources :incidents do
-
     resources :tasks
   end
 

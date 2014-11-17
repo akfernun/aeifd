@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  incident_assignment_id: 1
+
+two:
+  incident_assignment_id: 1

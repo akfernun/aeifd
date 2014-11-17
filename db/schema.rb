@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111205633) do
+ActiveRecord::Schema.define(version: 20141117192255) do
 
   create_table "asset_roles", force: true do |t|
     t.string   "name"
@@ -69,6 +69,21 @@ ActiveRecord::Schema.define(version: 20141111205633) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "mayday_assignments", force: true do |t|
+    t.integer  "mayday_id"
+    t.integer  "asset_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "maydays", force: true do |t|
+    t.integer  "incident_assignment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.string   "code"
   end
 
   create_table "scene_assignments", force: true do |t|

@@ -74,6 +74,7 @@ role_string = "1st Engine
 1st Ladder
 2nd Ladder
 Rapid Intervention Team
+Active RIT
 ";
 
 role_string2 = role_string.split("\n");

@@ -69,6 +69,6 @@ class MaydayAssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mayday_assignment_params
-      params.require(:mayday_assignment).permit(:mayday_id, :asset_id)
+      params.require(:mayday_assignment).permit(:mayday_id,:asset_id)
     end
 end

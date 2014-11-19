@@ -1,5 +1,6 @@
 class EntriesController < ApplicationController
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
+  before_action :set_incident, only: [:new,:create,:update,:edit, :destroy]
 
   # GET /entries
   # GET /entries.json
@@ -16,6 +17,7 @@ class EntriesController < ApplicationController
   def new
     @entry = Entry.new
 
+
   end
 
   # GET /entries/1/edit
@@ -26,10 +28,11 @@ class EntriesController < ApplicationController
   # POST /entries.json
   def create
     @entry = Entry.new(entry_params)
-    @entry.incident_id = @incident
+    @entry.incident_id = params[:incident_id]
+
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to @entry, notice: 'Entry was successfully created.' }
+        format.html { redirect_to edit_incident_path(@incident), notice: 'Entry was successfully created.' }
         format.json { render :show, status: :created, location: @entry }
       else
         format.html { render :new }
@@ -66,6 +69,10 @@ class EntriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_entry
       @entry = Entry.find(params[:id])
+    end
+
+    def set_incident
+      @incident = Incident.find(params[:incident_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

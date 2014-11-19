@@ -59,7 +59,7 @@ class IncidentsController < ApplicationController
     #mayday.save
 
     @rit.first.update_attribute(:asset_role_id, 6)
-  
+
     respond_to do |format|
         if mayday.save
           format.html { redirect_to edit_incident_path(@incident), notice: 'Incident was successfully created.' }

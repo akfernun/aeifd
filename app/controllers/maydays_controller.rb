@@ -16,11 +16,13 @@ class MaydaysController < ApplicationController
   # GET /maydays/new
   def new
     @mayday = Mayday.new
+
   end
 
   # GET /maydays/1/edit
   def edit
     @incident = IncidentAssignment.find(@mayday.incident_assignment_id).incident_id
+
   end
 
   def endmayday
@@ -91,6 +93,6 @@ class MaydaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mayday_params
-      params.require(:mayday).permit(:incident_assignment_id, :code, :end_time,mayday_assignments_attributes: [:id, :mayday_id, :asset_id,:_destroy])
+      params.require(:mayday).permit(:incident_assignment_id, :code, :end_time,mayday_assignments_attributes: [:id,:mayday_assignment, :mayday_id, :asset_id,:_destroy])
     end
 end

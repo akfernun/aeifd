@@ -8,6 +8,7 @@ class Mayday < ActiveRecord::Base
 
 	accepts_nested_attributes_for :mayday_assignments, :allow_destroy => true
 
+
  def create_action
  	get_incident_assignment = IncidentAssignment.find(self.incident_assignment_id)
  	rit = IncidentAssignment.where(incident_id: get_incident_assignment.incident_id, asset_role_id: 5  )
@@ -26,7 +27,7 @@ class Mayday < ActiveRecord::Base
       dd, hh = hh.divmod(24)
       @duration= "%d days, %d hours, %d minutes and %d seconds" % [dd, hh, mm, ss]
 
-     
+
 
       @entry = Entry.new(incident_id: the_incident_id.incident_id, name: "#{self.name} has ended. Duration: #{@duration}")
       @entry.save

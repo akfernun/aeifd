@@ -13,7 +13,7 @@
   <% end %>
 
   <div class="field task_fields">
-    <%= f.label :primar_search %><br>
+    <%= f.label :primar_search, "Primary Search" %><br>
     <%= f.check_box :primar_search %>
     <%
       formatted_time = @incident.created_at.strftime('%H:%M:%S');
@@ -68,7 +68,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>
 

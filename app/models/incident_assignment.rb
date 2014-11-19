@@ -25,7 +25,7 @@ class IncidentAssignment < ActiveRecord::Base
    	end
 
    	def update_action
-      @entry = Entry.new(incident_id: @incident_id, name: "#{self.asset.name} Assignment Updated - Now assigned role #{self.asset_role.name} - location #{self.location.name}")
+      @entry = Entry.new(incident_id: @incident_id, name: "Updated Assignment for #{self.asset.name} - Now Assigned role #{self.asset_role.name} - location #{self.location.name} ")
       @entry.save
     end
 

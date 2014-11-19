@@ -59,7 +59,7 @@ class IncidentsController < ApplicationController
     #mayday.save
 
     @rit.first.update_attribute(:asset_role_id, 6)
-  
+
     respond_to do |format|
         if mayday.save
           format.html { redirect_to edit_incident_path(@incident), notice: 'Incident was successfully created.' }
@@ -90,7 +90,7 @@ class IncidentsController < ApplicationController
     @task = @incident.task
     gon.incident= @incident
     @rit2 = IncidentAssignment.where(incident_id: @incident, asset_role_id: 5)
-    @maydays = Mayday.where(incident_assignment_id: @incident.incident_assignments)
+    @maydays = Mayday.where(incident_assignment_id: @incident.incident_assignments, end_time: nil)
 
   end
 

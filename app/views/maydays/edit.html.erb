@@ -1,11 +1,22 @@
+<% if notice %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <span id="notice"><%= notice %></span>
+    </div>
+  </div>
+<% end %>
 <div class="row">
-	<div class="col-lg-9">
+	<div class="col-lg-5">
 		<h3 class="title">Editing <%= @mayday.name %></h3>
 	</div>
 
-	<div class="col-lg-3" style="margin:25px 0 0 0; text-align:right">
-		<%= link_to 'View Mayday Log', @mayday, :class => "btn btn-primary btn-sm" %> 
-		<%= link_to 'Back to Incident', edit_incident_path(@incident), :class => "btn btn-primary btn-sm" %>
+	<div class="col-lg-7">
+    <div class="col-sm-2"></div>
+      <div class="col-sm-10" style="margin:20px 0 0 0; text-align:right">
+        <%= link_to 'End Mayday'.html_safe, endmayday_path(@mayday), :class => 'btn btn-danger btn-sm', :style => "color: white;", :id => "endmaydaybutton"  %>
+    		<%#= link_to 'View Mayday Log', @mayday, :class => "btn btn-primary btn-sm" %> 
+    		<%= link_to 'Back to Incident', edit_incident_path(@incident), :class => "btn btn-primary btn-sm" %>
+      </div>
 	</div>
 </div>
 

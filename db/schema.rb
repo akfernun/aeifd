@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117192255) do
+ActiveRecord::Schema.define(version: 20141118041528) do
 
   create_table "asset_roles", force: true do |t|
     t.string   "name"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20141117192255) do
     t.datetime "updated_at"
     t.string   "name"
     t.string   "code"
+    t.datetime "end_time"
   end
 
   create_table "scene_assignments", force: true do |t|

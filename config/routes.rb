@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
    # resources :tasks
 
-  resources :entries
+  
 
   resources :asset_roles
 
@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :incident_assignments
   resources :assets
   resources :incidents do
+    resources :entries
     resources :tasks
   end
 
@@ -37,7 +38,7 @@ Rails.application.routes.draw do
   get 'incidents/:id/deployRIT', to: 'incidents#deployRIT', :as => "deployRIT"
   get 'incidents/:id/sendemail', to: 'incidents#sendemail', :as => "sendemail"
   get 'incidents/:id/endincident', to: 'incidents#endincident', :as => "endincident"
-
+  get 'maydays/:id/endmayday', to: 'maydays#endmayday', :as => "endmayday"
   # Example of regular route:
     #get 'measures/complete' => 'measure#complete'
 

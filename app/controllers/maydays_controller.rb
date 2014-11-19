@@ -1,5 +1,5 @@
 class MaydaysController < ApplicationController
-  before_action :set_mayday, only: [:show, :edit, :update, :destroy]
+  before_action :set_mayday, only: [:show, :edit, :update, :destroy, :endmayday]
 
   # GET /maydays
   # GET /maydays.json
@@ -21,6 +21,26 @@ class MaydaysController < ApplicationController
   # GET /maydays/1/edit
   def edit
     @incident = IncidentAssignment.find(@mayday.incident_assignment_id).incident_id
+  end
+
+  def endmayday
+    @incident = IncidentAssignment.find(@mayday.incident_assignment_id).incident_id
+    @mayday.end_time = Time.now
+    t = @mayday.end_time - @mayday.created_at
+      mm, ss = t.divmod(60)
+      hh, mm = mm.divmod(60)
+      dd, hh = hh.divmod(24)
+    @duration= "%d days, %d hours, %d minutes and %d seconds" % [dd, hh, mm, ss]
+
+      respond_to do |format|
+        if @mayday.save
+          format.html { redirect_to edit_incident_path(@incident), notice: "#{@mayday.name} has ended. Duration: #{@duration}" }
+          format.json { render :show, status: :created, location: @incident }
+        else
+          format.html { render :new }
+          format.json { render json: @incident.errors, status: :unprocessable_entity }
+        end
+      end
   end
 
   # POST /maydays
@@ -71,6 +91,6 @@ class MaydaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mayday_params
-      params.require(:mayday).permit(:incident_assignment_id, :code, mayday_assignments_attributes: [:id, :mayday_id, :asset_id,:_destroy])
+      params.require(:mayday).permit(:incident_assignment_id, :code, :end_time,mayday_assignments_attributes: [:id, :mayday_id, :asset_id,:_destroy])
     end
 end

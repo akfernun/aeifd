@@ -11,6 +11,7 @@ class IncidentAssignment < ActiveRecord::Base
 
 	before_save :get_incident_id
 	after_create :create_action
+	after_update :update_action
 
 	private
 
@@ -22,5 +23,10 @@ class IncidentAssignment < ActiveRecord::Base
    	def get_incident_id
      @incident_id = self.incident.id
    	end
+
+   	def update_action
+      @entry = Entry.new(incident_id: @incident_id, name: "#{self.asset.name} Assignment Updated - Now assigned role #{self.asset_role.name} - location #{self.location.name}")
+      @entry.save
+    end
 
 end

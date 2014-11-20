@@ -1,5 +1,4 @@
 <%= form_for(@incident, html: {class: 'form-horizontal'}) do |f| %>
-<<<<<<< HEAD
   <% if @incident.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@incident.errors.count, "error") %> prohibited this incident from being saved:</h2>
@@ -17,25 +16,6 @@
 	    <span id="notice"><%= notice %></span>
 	  </div>
 	</div>
-=======
-<% if @incident.errors.any? %>
-<div id="error_explanation">
-	<h2><%= pluralize(@incident.errors.count, "error") %> prohibited this incident from being saved:</h2>
-
-	<ul>
-		<% @incident.errors.full_messages.each do |message| %>
-		<li><%= message %></li>
-		<% end %>
-	</ul>
-</div>
-<% end %>
-<% if notice %>
-<div class="panel panel-default">
-	<div class="panel-body">
-		<span id="notice"><%= notice %></span>
-	</div>
-</div>
->>>>>>> master
 <% end %>
 <div class="row">
 	<div class="col-lg-3">
@@ -61,13 +41,8 @@
 		<div class="col-sm-8" style="margin:20px 0 0 0; text-align:right">
 
 			<% if @incident.end_time.blank? %>
-<<<<<<< HEAD
 				<%= link_to 'New Log Entry', new_incident_entry_path(@incident), :class=>'btn btn-primary btn-sm' %>
 				<%= link_to 'View Benchmarks'.html_safe, edit_incident_task_path(@incident,@task.id), :class => 'btn btn-primary btn-sm', :style => "color: white;"  %>
-=======
-			<%= link_to 'New Log Entry', new_incident_entry_path(@incident), :class=>'btn btn-primary btn-sm' %>
-			<%= link_to 'View Benchmarks'.html_safe, edit_incident_task_path(@incident,@task.id), :class => 'btn btn-primary btn-sm', :style => "color: white;"  %>
->>>>>>> master
 
 				<%= link_to 'End Incident'.html_safe, endincident_path(@incident), :class => 'btn btn-danger btn-sm', :style => "color: white;", :id => "endincidentbutton"  %>
 			<% end %>

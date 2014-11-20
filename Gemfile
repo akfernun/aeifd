@@ -17,6 +17,9 @@ gem 'gon'
 gem 'jquery-turbolinks'
 #gem 'pg'
 
+gem 'jquery-ui-rails'
+
+
 
 gem 'cocoon'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

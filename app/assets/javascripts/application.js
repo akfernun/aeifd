@@ -14,6 +14,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require cocoon
+//= require jquery-ui
 //= require jquery.countdown
 //= require turbolinks
 //= require jquery.turbolinks

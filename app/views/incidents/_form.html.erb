@@ -47,26 +47,10 @@
 		  					<%= f.select :incident_strategy_id, options_from_collection_for_select(IncidentStrategy.all, :id, :name), {}, {class: "form-control"} %>
 						</div>
 					</div>
-					<div class="field form-group">
-						<%= f.fields_for :incident_assignments do |builder| %>
-							<%= render 'incident_assignment_fields', :f => builder %>
-				    	<% end %>
-
-				    	<%= link_to_add_association 'Add Apparatus', f, :incident_assignments, :class => "btn btn-default form-control" %>
-					</div>
 
 						<div class="actions">
 	    					<%= f.submit :class=>"btn btn-primary" %>
 						</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6">
-			<div class="panel panel-default">
-				<div class="panel-body ScenesContainer">
-					<div class="#">
-			    	<%= link_to_add_association 'Add New Exposure', f, :scenes, :class=>"btn btn-default form-control" %>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -88,44 +72,14 @@
 
 		});
 
-		 $('.panel-body').on('cocoon:after-insert', function(e, insertedItem) {
+		$('.panel-body').on('cocoon:after-insert', function(e, insertedItem) {
     			var mySelected = $("#incident_battalion_id option:selected").val();
     			$('.ApparatusSelect :not(option[data-battalion='+mySelected+'])').hide();
     			// $('.ApparatusSelect option[data-battalion='+mySelected+']').first().attr("selected", true);
 
     			$('.ApparatusSelect').last().children('option[data-battalion='+mySelected+']').first().attr("selected", true);
 
-  			});
-
-		   $('.ScenesContainer').on('cocoon:after-insert', function(e, insertedItem) {
-
-    			if(insertedItem[2].className == 'apparatus_contain'){
-    				var mySelectBox = $('.ScenesContainer').find(".newScene").last().find('.ExposureBattalionSelect');
-    				var selectedValue = mySelectBox.children("option:selected").val(); // THIS IS THE BATTALION
-
-    				$('.ScenesContainer').find(".nested-fields").last().find('.SceneApparatusSelect :not(option[data-battalion='+selectedValue+'])').hide();
-
-    				$('.ScenesContainer').find(".nested-fields").last().find('.SceneApparatusSelect option[data-battalion='+selectedValue+']').first().prop("selected", true);
-
-    				$('.ScenesContainer').find(".newScene").last().find('.ExposureBattalionSelect').change(function(){
-
-    					var mySelectBox = $('.ScenesContainer').find(".newScene").last().find('.ExposureBattalionSelect');
-    					var selectedValue = mySelectBox.children("option:selected").val(); // THIS IS THE BATTALION
-
-    					$('.ScenesContainer').find(".newScene").last().find('.ExposureBattalionSelect').closest(".newScene").find('.SceneApparatusSelect').children('option[data-battalion]').show();
-
-
-    					$('.ScenesContainer').find(".newScene").last().find('.ExposureBattalionSelect').closest(".newScene").find('.SceneApparatusSelect').children(':not(option[data-battalion='+selectedValue+'])').hide();
-
-    					$('.ScenesContainer').find(".nested-fields").last().find('.SceneApparatusSelect option[data-battalion='+selectedValue+']').first().prop("selected", true);
-
-    				});
-    			}
-
-  			});
-
-
-
+  		});
 	});
 
 

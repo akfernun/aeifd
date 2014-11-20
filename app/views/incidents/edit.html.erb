@@ -1,4 +1,5 @@
 <%= form_for(@incident, html: {class: 'form-horizontal'}) do |f| %>
+<<<<<<< HEAD
   <% if @incident.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@incident.errors.count, "error") %> prohibited this incident from being saved:</h2>
@@ -16,6 +17,25 @@
 	    <span id="notice"><%= notice %></span>
 	  </div>
 	</div>
+=======
+<% if @incident.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@incident.errors.count, "error") %> prohibited this incident from being saved:</h2>
+
+	<ul>
+		<% @incident.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+<% if notice %>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<span id="notice"><%= notice %></span>
+	</div>
+</div>
+>>>>>>> master
 <% end %>
 <div class="row">
 	<div class="col-lg-3">
@@ -25,24 +45,29 @@
 	<div class="col-lg-9">
 		<div class="col-sm-4">
 
-		<% logger.debug " This is the endtime #{@incident.end_time.blank?}" %>
+			<% logger.debug " This is the endtime #{@incident.end_time.blank?}" %>
 			<%
-				formatted_time = @incident.created_at.strftime('%H:%M:%S');
-				formatted_date = @incident.created_at.strftime('%Y-%m-%d');
-			 %>
+			formatted_time = @incident.created_at.strftime('%H:%M:%S');
+			formatted_date = @incident.created_at.strftime('%Y-%m-%d');
+			%>
 
-			 <% if @incident.end_time.blank?  %>
-				<div class="example" style="height:50px;" data-date=<%= formatted_date %>&#32;<%= formatted_time %>></div>
+			<% if @incident.end_time.blank?  %>
+			<div class="example" style="height:50px;" data-date=<%= formatted_date %>&#32;<%= formatted_time %>></div>
 			<% else %>
-				<div style="margin-top: 30px;">Incident ended on <%= @incident.end_time.strftime('%Y-%m-%d at %I:%M%p') %></div>
+			<div style="margin-top: 30px;">Incident ended on <%= @incident.end_time.strftime('%Y-%m-%d at %I:%M%p') %></div>
 			<% end %>
 		</div>
 
 		<div class="col-sm-8" style="margin:20px 0 0 0; text-align:right">
 
 			<% if @incident.end_time.blank? %>
+<<<<<<< HEAD
 				<%= link_to 'New Log Entry', new_incident_entry_path(@incident), :class=>'btn btn-primary btn-sm' %>
 				<%= link_to 'View Benchmarks'.html_safe, edit_incident_task_path(@incident,@task.id), :class => 'btn btn-primary btn-sm', :style => "color: white;"  %>
+=======
+			<%= link_to 'New Log Entry', new_incident_entry_path(@incident), :class=>'btn btn-primary btn-sm' %>
+			<%= link_to 'View Benchmarks'.html_safe, edit_incident_task_path(@incident,@task.id), :class => 'btn btn-primary btn-sm', :style => "color: white;"  %>
+>>>>>>> master
 
 				<%= link_to 'End Incident'.html_safe, endincident_path(@incident), :class => 'btn btn-danger btn-sm', :style => "color: white;", :id => "endincidentbutton"  %>
 			<% end %>
@@ -57,17 +82,31 @@
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
- 		<h3 class="panel-title">Incident</h3>
+		<h3 class="panel-title">Incident</h3>
 	</div>
 	<div class="panel-body">
+		<div class="col-lg-3" style="padding:0!important;">
+			<div class="btn-group-vertical" style="width:100%;"  role="group">
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-default big-button" id="assignments_btn">Assignments</button>
+				</div>
+				<div class="btn-group" role="group">
+					<button type="button" id="incidents_exposures_btn" class="btn btn-default big-button">Exposures</button>
+				</div>
+				<div class="btn-group" id="incident_info_btn" role="group">
+					<button type="button" class="btn btn-default big-button">Information</button>
+				</div>
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-default big-button">Benchmarks</button>
+				</div>
+			</div>
 
-
-	<% if !@maydays.blank? %>
-		<div class="col-sm-5">
-	<% else %>
-		<div class="col-sm-6">
-	<% end %>
-			<div class="panel panel-default">
+			<% @maydays.each do |m| %>
+				<%= link_to "#{m.name}", edit_mayday_path(m.id), :class => "btn btn-default btn-sm" %>
+				<% end %> <!-- THIS IS IMPORTANT SHIT SO KEEP TRACK OF IT -->
+		</div>
+		<div class="col-lg-9">
+			<div class="panel panel-default switchable" id="incident_info">
 				<div class="panel-body">
 					<div class="field form-group">
 						<%= f.label :name, "Incident Name", class: 'col-sm-3 control-label' %>
@@ -98,6 +137,10 @@
 		  					<%= f.select :incident_strategy_id, options_from_collection_for_select(IncidentStrategy.all, :id, :name, :selected => f.object.incident_strategy_id), {}, {class: "form-control"} %>
 						</div>
 					</div>
+				</div>
+			</div>
+			<div class="panel panel-default switchable" id="incidents_assignments">
+				<div class="panel-body">
 					<div class="field form-group">
 
 						<%= f.fields_for :incident_assignments do |builder| %>
@@ -106,50 +149,30 @@
 
 				    	<%= link_to_add_association 'Add Apparatus', f, :incident_assignments, :id =>"AddAppLink", :class => "btn btn-default form-control" %>
 					</div>
+				</div>
+			</div>
+			<div class="panel panel-default switchable" id="incidents_exposures">
+				<div class="panel-body">
+					<div class="panel-body ScenesContainer">
 
-						<div class="actions">
+							<div class="#" >
+							<%= f.fields_for :scenes do |builder| %>
+								<%= render 'scene_fields', :f => builder %>
+							<% end %>
+					    	<%= link_to_add_association 'Add New Exposure', f, :scenes, :class=>"btn btn-default form-control" %>
+							</div>
+
+
+					</div>
+				</div>
+			</div>
+			<div class="actions">
 						<% if @incident.end_time.blank? %>
 	    					<%= f.submit :class=>"btn btn-primary" %>
 	    				<% else %>
 	    					<%= f.submit :class=>"btn btn-primary disabled" %>
 	    				<% end %>
 						</div>
-
-				</div>
-			</div>
-		</div>
-			<% if !@maydays.blank? %>
-		<div class="col-sm-5">
-	<% else %>
-		<div class="col-sm-6">
-	<% end %>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title" style="color:black">Exposures</h3>
-				</div>
-				<div class="panel-body ScenesContainer">
-					<div class="#">
-					<%= f.fields_for :scenes do |builder| %>
-						<%= render 'scene_fields', :f => builder %>
-					<% end %>
-			    	<%= link_to_add_association 'Add New Exposure', f, :scenes, :class=>"btn btn-default form-control" %>
-					</div>
-				</div>
-			</div>
-		</div>
-			<% if !@maydays.blank? %>
-				<div class="col-sm-2">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title" style="color:black">Maydays</h3>
-					</div>
-					<div class="panel-body">
-						<% @maydays.each do |m| %>
-								<%= link_to "#{m.name}", edit_mayday_path(m.id), :class => "btn btn-default btn-sm" %><BR>
-						<% end %>
-					</div>
-				</div>
-			<% end %>
 		</div>
 	</div>
 </div>
@@ -157,9 +180,10 @@
 
 
 
-<script>
-	$(document).ready(function(){
-		var mySelected = $("#incident_battalion_id option:selected").val();
+
+		<script>
+			$(document).ready(function(){
+				var mySelected = $("#incident_battalion_id option:selected").val();
 		$('.ApparatusSelect :not(option[data-battalion='+mySelected+'])').hide(); //hide appropriate options based on selected battalion
 
 		$("#incident_battalion_id").change(function(){
@@ -175,21 +199,39 @@
 			});
 		});
 
-		 $('.panel-body').on('cocoon:after-insert', function(e, insertedItem) {
-    			var mySelected = $("#incident_battalion_id option:selected").val();
-    			$('.ApparatusSelect :not(option[data-battalion='+mySelected+'])').hide();
+		$('.panel-body').on('cocoon:after-insert', function(e, insertedItem) {
+			var mySelected = $("#incident_battalion_id option:selected").val();
+			$('.ApparatusSelect :not(option[data-battalion='+mySelected+'])').hide();
 
     			// $('.ApparatusSelect option[data-battalion='+mySelected+']').first().attr("selected", true);
 
     			$('.ApparatusSelect').children('option[data-battalion='+mySelected+']').first().attr("selected", true);
 
-  			});
+    		});
+
+		$('.ScenesContainer').on('cocoon:before-insert', function(e, insertedItem){
+
+			var insert = insertedItem[2];
+
+				var myTime = new Date();
+				var mysec = myTime.getMilliseconds().toString();
+				var mymilli = myTime.getSeconds().toString();
+				var rando = Math.floor((Math.random() * 10000)+1).toString();
 
 
-		  $('.ScenesContainer').on('cocoon:after-insert', function(e, insertedItem) {
+				$(insert).find(".toggle-head").attr("data-target", "#"+mysec+mymilli+rando);
+				$(insert).find(".toggle-head").closest('.panel-heading').next().attr("id",mysec+mymilli+rando);
 
-    			if(insertedItem[2].className == 'apparatus_contain'){
-    				var mySelectBox = $('.ScenesContainer').find(".newScene").last().find('.ExposureBattalionSelect');
+				$(insert).find(".toggle-head").closest('.panel-heading').next().addClass("in");
+
+				$(insert).find(".toggle-head").addClass("collapsed");
+
+		});
+
+		$('.ScenesContainer').on('cocoon:after-insert', function(e, insertedItem) {
+
+			if(insertedItem[2].className == 'apparatus_contain'){
+				var mySelectBox = $('.ScenesContainer').find(".newScene").last().find('.ExposureBattalionSelect');
     				var selectedValue = mySelectBox.children("option:selected").val(); // THIS IS THE BATTALION
 
     				$('.ScenesContainer').find(".nested-fields").last().find('.SceneApparatusSelect :not(option[data-battalion='+selectedValue+'])').hide();
@@ -211,8 +253,58 @@
     				});
     			}
 
-  			});
-	});
+    		});
+
+		// EVERYTHING BELOW HANDLES PAGING AND NAVIGATION
+
+
+		$('.toggle-head').each(function(){
+
+
+				var myTime = new Date();
+				var mysec = myTime.getMilliseconds().toString();
+				var mymilli = myTime.getSeconds().toString();
+				var rando = Math.floor((Math.random() * 10000)+1).toString();
+
+				$(this).last().attr("data-target", "#"+mysec+mymilli+rando);
+				$(this).closest(".panel-heading").next().attr("id",mysec+mymilli+rando);
+				$(this).addClass("collapsed");
+			var exposureName = $(this).closest(".panel-heading").next().find(".exposureName").val();
+			$(this).text(exposureName);
+
+
+
+
+		});
+
+
+		$(".switchable").hide();
+		$("#incidents_assignments").show();
+		$("#assignments_btn").addClass("active");
+
+		$(".big-button").click(function(){
+			$(".big-button").removeClass("active");
+			$(this).addClass("active");
+		});
+
+
+		$("#incident_info_btn").click(function(){
+			$(".switchable").hide();
+			$("#incident_info").show();
+
+		});
+
+		$("#assignments_btn").click(function(){
+
+			$(".switchable").hide();
+			$("#incidents_assignments").show();
+		});
+
+		$("#incidents_exposures_btn").click(function(){
+			$(".switchable").hide();
+			$("#incidents_exposures").show();
+		});
+});
 </script>
 <% end %>
 

@@ -1,53 +1,58 @@
-<div class="#"></div>
 <div class="exposure_contain"></div>
-<div class="nested-fields">
-
-		<div class="panel panel-default">
-
-			<div class="panel-heading">
- 				<h3 class="panel-title" style="color:#444">Exposure</h3>
-			</div>
-<div class="panel-body newScene">
-
-	<div class="field form-group">
-	    <%= f.label :name, "Scene Name", class: 'col-sm-3 control-label' %>
-	    <div class="col-sm-9">
-	    	<%= f.text_field :name, class: 'form-control' %>
-	    </div>
-	</div>
-
-	<!-- add in the exposure location -->
-
-	<div class="field form-group">
-	    <%= f.label :scene_type_id, "Structure", class: 'col-sm-3 control-label' %>
-
-		<div class="col-sm-9">
-	  		<%= f.select :scene_type_id, options_from_collection_for_select(SceneType.all, :id, :name,:selected => f.object.scene_type_id), {}, {class: "form-control"} %>
+<div class="nested-fields ">
+	<!-- <div id="accordion2">
+  <h3>First header</h3>
+  <div>First content panel</div>
+  <h3>Second header</h3>
+  <div>Second content panel</div>
+</div> -->
+<!-- data-target="#demo" -->
+	<div class="panel panel-default" >
+		<div class="panel-heading">
+			<h3 class="panel-title toggle-head" data-toggle="collapse"  style="color:#444">Exposure</h3>
 		</div>
-	</div>
-	<div class="field form-group">
-	    <%= f.label :battalion_id, "Battalion", class: 'col-sm-3 control-label' %>
 
-		<div class="col-sm-9">
-	  		<%= f.select :battalion_id, options_from_collection_for_select(Battalion.all, :id, :name,:selected => f.object.battalion_id), {}, {class: "ExposureBattalionSelect form-control"} %>
-		</div>
-	</div>
-  		<div class="panel panel-default">
-			<div class="panel-heading ">
- 				<h3 class="panel-title" style="color:#444">Apparatus on this Scene</h3>
+		<div class="panel-body newScene collapse">
+
+			<div class="field form-group">
+				<%= f.label :name, "Scene Name", class: 'col-sm-3 control-label' %>
+				<div class="col-sm-9">
+					<%= f.text_field :name, class: 'form-control exposureName' %>
+				</div>
 			</div>
-			<div class="panel-body">
-				<div class="#">
-				    <%= f.fields_for :scene_assignments do |builder| %>
+
+			<!-- add in the exposure location -->
+
+			<div class="field form-group">
+				<%= f.label :scene_type_id, "Structure", class: 'col-sm-3 control-label' %>
+
+				<div class="col-sm-9">
+					<%= f.select :scene_type_id, options_from_collection_for_select(SceneType.all, :id, :name,:selected => f.object.scene_type_id), {}, {class: "form-control"} %>
+				</div>
+			</div>
+			<div class="field form-group">
+				<%= f.label :battalion_id, "Battalion", class: 'col-sm-3 control-label' %>
+
+				<div class="col-sm-9">
+					<%= f.select :battalion_id, options_from_collection_for_select(Battalion.all, :id, :name,:selected => f.object.battalion_id), {}, {class: "ExposureBattalionSelect form-control"} %>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading ">
+					<h3 class="panel-title" style="color:#444">Apparatus on this Scene</h3>
+				</div>
+				<div class="panel-body">
+					<div class="#">
+						<%= f.fields_for :scene_assignments do |builder| %>
 						<%= render 'scene_assignment_fields', :f => builder %>
-				    <% end %>
+						<% end %>
 
-	    			<%= link_to_add_association 'Add Apparatus', f, :scene_assignments, :class => "btn btn-default form-control" %>
-	    		</div>
-	    	</div>
-	    </div>
-<%= link_to_remove_association('Remove Scene', f, :class => 'btn btn-default form-control') %>
+						<%= link_to_add_association 'Add Apparatus', f, :scene_assignments, :class => "btn btn-default form-control" %>
+					</div>
+				</div>
+			</div>
+			<%= link_to_remove_association('Remove Scene', f, :class => 'btn btn-default form-control') %>
 
-</div>
-</div>
+		</div>
+	</div>
 </div>

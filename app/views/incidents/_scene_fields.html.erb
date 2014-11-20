@@ -9,15 +9,15 @@
 <!-- data-target="#demo" -->
 	<div class="panel panel-default" >
 		<div class="panel-heading">
-			<h3 class="panel-title toggle-head collapse " data-toggle="collapse"  style="color:#444">Exposure</h3>
+			<h3 class="panel-title toggle-head" data-toggle="collapse"  style="color:#444">Exposure</h3>
 		</div>
 
-		<div class="panel-body newScene collapse ">
+		<div class="panel-body newScene collapse">
 
 			<div class="field form-group">
 				<%= f.label :name, "Scene Name", class: 'col-sm-3 control-label' %>
 				<div class="col-sm-9">
-					<%= f.text_field :name, class: 'form-control' %>
+					<%= f.text_field :name, class: 'form-control exposureName' %>
 				</div>
 			</div>
 

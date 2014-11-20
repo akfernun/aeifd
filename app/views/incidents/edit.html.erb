@@ -184,24 +184,26 @@
 
     		});
 
+		$('.ScenesContainer').on('cocoon:before-insert', function(e, insertedItem){
 
-		$('.ScenesContainer').on('cocoon:after-insert', function(e, insertedItem) {
+			var insert = insertedItem[2];
 
 				var myTime = new Date();
 				var mysec = myTime.getMilliseconds().toString();
 				var mymilli = myTime.getSeconds().toString();
 				var rando = Math.floor((Math.random() * 10000)+1).toString();
 
-				console.log($('.nested-fields'));
 
-				$('.toggle-head').first().attr("data-target", "#"+mysec+mymilli+rando);
+				$(insert).find(".toggle-head").attr("data-target", "#"+mysec+mymilli+rando);
+				$(insert).find(".toggle-head").closest('.panel-heading').next().attr("id",mysec+mymilli+rando);
 
-				$('.toggle-head').first().closest('.panel-heading').next().attr("id",mysec+mymilli+rando);
+				$(insert).find(".toggle-head").closest('.panel-heading').next().addClass("in");
 
+				$(insert).find(".toggle-head").addClass("collapsed");
 
-				$('.toggle-head').first().addClass("collapse in");
+		});
 
-
+		$('.ScenesContainer').on('cocoon:after-insert', function(e, insertedItem) {
 
 			if(insertedItem[2].className == 'apparatus_contain'){
 				var mySelectBox = $('.ScenesContainer').find(".newScene").last().find('.ExposureBattalionSelect');
@@ -241,17 +243,18 @@
 
 				$(this).last().attr("data-target", "#"+mysec+mymilli+rando);
 				$(this).closest(".panel-heading").next().attr("id",mysec+mymilli+rando);
-				$(this).addClass("collapse");
+				$(this).addClass("collapsed");
+			var exposureName = $(this).closest(".panel-heading").next().find(".exposureName").val();
+			$(this).text(exposureName);
+
 
 
 
 		});
-		if($(".collapse").length){
-			$(".collapse").collapse();
-		}
+
 
 		$(".switchable").hide();
-		$("#incidents_exposures").show();
+		$("#incidents_assignments").show();
 		$("#assignments_btn").addClass("active");
 
 		$(".big-button").click(function(){

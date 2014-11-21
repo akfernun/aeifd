@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :checkoff_incidents
+
+  resources :checkoffs
+
   resources :mayday_assignments
 
   resources :maydays
@@ -12,7 +16,7 @@ Rails.application.routes.draw do
 
    # resources :tasks
 
-  
+
 
   resources :asset_roles
 
@@ -39,6 +43,8 @@ Rails.application.routes.draw do
   get 'incidents/:id/sendemail', to: 'incidents#sendemail', :as => "sendemail"
   get 'incidents/:id/endincident', to: 'incidents#endincident', :as => "endincident"
   get 'maydays/:id/endmayday', to: 'maydays#endmayday', :as => "endmayday"
+  get 'checkoff_incidents/:id/docheckoff', to: 'checkoff_incidents#docheckoff', :as => "docheckoff"
+
   # Example of regular route:
     #get 'measures/complete' => 'measure#complete'
 

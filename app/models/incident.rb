@@ -4,6 +4,8 @@ class Incident < ActiveRecord::Base
   has_many :entries
   has_one :task
   has_one :timer
+  has_many :checkoffs, :through => :checkoff_incidents
+  has_many :checkoff_incidents
   has_many :assets, :through =>  :incident_assignments
   has_many :incident_assignments
   belongs_to :scene_type
@@ -28,6 +30,11 @@ class Incident < ActiveRecord::Base
 
     @task = Task.new(incident_id: self.id, primar_search:false, all_clear:false, utilities_contacted:false, safety_officer_arrived:false, utilities_disconnected:false, secondary_search:false, fire_under_control:false)
     @task.save
+
+    @incident_checkoffs = Checkoff.where(:checkofftype => "incident");
+    @incident_checkoffs.each do |m|
+      CheckoffIncident.create(incident_id:self.id, checkoff_id:m.id, status:"incomplete")
+    end
 
 
 

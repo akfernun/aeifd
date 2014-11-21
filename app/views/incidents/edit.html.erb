@@ -1,21 +1,21 @@
 <%= form_for(@incident, html: {class: 'form-horizontal'}) do |f| %>
-  <% if @incident.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@incident.errors.count, "error") %> prohibited this incident from being saved:</h2>
+<% if @incident.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@incident.errors.count, "error") %> prohibited this incident from being saved:</h2>
 
-      <ul>
-      <% @incident.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<ul>
+		<% @incident.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
 <% if notice %>
-	<div class="panel panel-default">
-	  <div class="panel-body">
-	    <span id="notice"><%= notice %></span>
-	  </div>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<span id="notice"><%= notice %></span>
 	</div>
+</div>
 <% end %>
 <div class="row">
 	<div class="col-lg-3">
@@ -41,10 +41,10 @@
 		<div class="col-sm-8" style="margin:20px 0 0 0; text-align:right">
 
 			<% if @incident.end_time.blank? %>
-				<%= link_to 'New Log Entry', new_incident_entry_path(@incident), :class=>'btn btn-primary btn-sm' %>
-				<%= link_to 'View Benchmarks'.html_safe, edit_incident_task_path(@incident,@task.id), :class => 'btn btn-primary btn-sm', :style => "color: white;"  %>
+			<%= link_to 'New Log Entry', new_incident_entry_path(@incident), :class=>'btn btn-primary btn-sm' %>
+			<%= link_to 'View Benchmarks'.html_safe, edit_incident_task_path(@incident,@task.id), :class => 'btn btn-primary btn-sm', :style => "color: white;"  %>
 
-				<%= link_to 'End Incident'.html_safe, endincident_path(@incident), :class => 'btn btn-danger btn-sm', :style => "color: white;", :id => "endincidentbutton"  %>
+			<%= link_to 'End Incident'.html_safe, endincident_path(@incident), :class => 'btn btn-danger btn-sm', :style => "color: white;", :id => "endincidentbutton"  %>
 			<% end %>
 
 			<%= link_to 'View Log File'.html_safe, incident_path(@incident), :class => 'btn btn-primary btn-sm', :style => "color: white;"  %>
@@ -57,7 +57,7 @@
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		<h3 class="panel-title">Incident</h3>
+		<h3 class="panel-title">Dashboard for <%= @incident.name %></h3>
 	</div>
 	<div class="panel-body">
 		<div class="col-lg-3" style="padding:0!important;">
@@ -71,14 +71,14 @@
 				<div class="btn-group" id="incident_info_btn" role="group">
 					<button type="button" class="btn btn-default big-button">Information</button>
 				</div>
-				<div class="btn-group" role="group">
+				<div class="btn-group" id="incident_benchmarks_btn" role="group">
 					<button type="button" class="btn btn-default big-button">Benchmarks</button>
 				</div>
 			</div>
 
 			<% @maydays.each do |m| %>
-				<%= link_to "#{m.name}", edit_mayday_path(m.id), :class => "btn btn-default btn-sm" %>
-				<% end %> <!-- THIS IS IMPORTANT SHIT SO KEEP TRACK OF IT -->
+			<%= link_to "#{m.name}", edit_mayday_path(m.id), :class => "btn btn-default btn-sm" %>
+			<% end %> <!-- THIS IS IMPORTANT SHIT SO KEEP TRACK OF IT -->
 		</div>
 		<div class="col-lg-9">
 			<div class="panel panel-default switchable" id="incident_info">
@@ -92,73 +92,223 @@
 
 					</div>
 					<div class="field form-group">
-					    <%= f.label :scene_type_id, "Structure", class: 'col-sm-3 control-label' %>
+						<%= f.label :scene_type_id, "Structure", class: 'col-sm-3 control-label' %>
 
 						<div class="col-sm-9">
-					  		<%= f.select :scene_type_id, options_from_collection_for_select(SceneType.all, :id, :name,:selected => f.object.scene_type_id), {}, {class: "form-control"} %>
+							<%= f.select :scene_type_id, options_from_collection_for_select(SceneType.all, :id, :name,:selected => f.object.scene_type_id), {}, {class: "form-control"} %>
 						</div>
 					</div>
 					<div class="field form-group">
-	    				<%= f.label :battalion_id, "Battalion", class: 'col-sm-3 control-label' %>
+						<%= f.label :battalion_id, "Battalion", class: 'col-sm-3 control-label' %>
 
 						<div class="col-sm-9">
-		  					<%= f.select :battalion_id, options_from_collection_for_select(Battalion.all, :id, :name,:selected => f.object.battalion_id), {}, {class: "form-control"} %>
+							<%= f.select :battalion_id, options_from_collection_for_select(Battalion.all, :id, :name,:selected => f.object.battalion_id), {}, {class: "form-control"} %>
 						</div>
 					</div>
 					<div class="field form-group">
-	    				<%= f.label :incident_strategy_id, "Strategy", class: 'col-sm-3 control-label' %>
+						<%= f.label :incident_strategy_id, "Strategy", class: 'col-sm-3 control-label' %>
 
 						<div class="col-sm-9">
-		  					<%= f.select :incident_strategy_id, options_from_collection_for_select(IncidentStrategy.all, :id, :name, :selected => f.object.incident_strategy_id), {}, {class: "form-control"} %>
+							<%= f.select :incident_strategy_id, options_from_collection_for_select(IncidentStrategy.all, :id, :name, :selected => f.object.incident_strategy_id), {}, {class: "form-control"} %>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="panel panel-default switchable" id="incidents_assignments">
-				<div class="panel-body">
-					<div class="field form-group">
 
-						<%= f.fields_for :incident_assignments do |builder| %>
-							<%= render 'incident_assignment_fields',:f => builder, :locals => {:incident_assignment_id => 5 } %>  <!-- What is locals?? -->
-				    	<% end %>
+<!-- 			INCIDENTS ASSIGNMENTS SECTION
+-->
+<div class="panel panel-default switchable" id="incidents_assignments">
+	<div class="panel-body">
+		<div class="field form-group">
 
-				    	<%= link_to_add_association 'Add Apparatus', f, :incident_assignments, :id =>"AddAppLink", :class => "btn btn-default form-control" %>
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-default switchable" id="incidents_exposures">
-				<div class="panel-body">
-					<div class="panel-body ScenesContainer">
+			<%= f.fields_for :incident_assignments do |builder| %>
+			<%= render 'incident_assignment_fields',:f => builder, :locals => {:incident_assignment_id => 5 } %>  <!-- What is locals?? -->
+			<% end %>
 
-							<div class="#" >
-							<%= f.fields_for :scenes do |builder| %>
-								<%= render 'scene_fields', :f => builder %>
-							<% end %>
-					    	<%= link_to_add_association 'Add New Exposure', f, :scenes, :class=>"btn btn-default form-control" %>
-							</div>
-
-
-					</div>
-				</div>
-			</div>
-			<div class="actions">
-						<% if @incident.end_time.blank? %>
-	    					<%= f.submit :class=>"btn btn-primary" %>
-	    				<% else %>
-	    					<%= f.submit :class=>"btn btn-primary disabled" %>
-	    				<% end %>
-						</div>
+			<%= link_to_add_association 'Add Apparatus', f, :incident_assignments, :id =>"AddAppLink", :class => "btn btn-default form-control" %>
 		</div>
 	</div>
 </div>
 
+<!-- EXPOSURE SECTION -->
+
+<div class="panel panel-default switchable" id="incidents_exposures">
+	<div class="panel-body">
+		<div class="panel-body ScenesContainer">
+
+			<div class="#" >
+				<%= f.fields_for :scenes do |builder| %>
+				<%= render 'scene_fields', :f => builder %>
+				<% end %>
+				<%= link_to_add_association 'Add New Exposure', f, :scenes, :class=>"btn btn-default form-control" %>
+			</div>
 
 
+		</div>
+	</div>
+</div>
+
+<!-- 					BENCHMARKS SECTION
+-->
+<div class="panel panel-default switchable" id="checkoff_incidents">
+	<div class="panel-body">
+		<table class="table">
+			<tr>
+				<th>Name</th>
+				<th>Time</th>
+				<th>Button</th>
+			</tr>
+			<%
+			formatted_time = @incident.created_at.strftime('%H:%M:%S');
+			formatted_date = @incident.created_at.strftime('%Y-%m-%d');
+
+			updated_date = @checkoffs[0].updated_at.strftime('%Y-%m-%d');
+			updated_time = @checkoffs[0].updated_at.strftime('%H:%M:%S');
+
+			@checkoffs.each do |m| %>
+			<tr>
+				<td><%= m.checkoff.name %></td>
+				<td>
+					<% if m.checkoff.name == "Primary Search" %>
+						<div id="primary_search" style="display:none;" data-updated=<%= updated_date %>&#32;<%= updated_time %>  data-completed= <%= m.status %> data-date=<%= formatted_date %>&#32;<%= formatted_time %> class="timer_task" ></div>
+					<% end %>
+					<% if m.checkoff.name == "Secondary Search" %>
+
+						<div id="secondary_search" style="display:none;" data-completed= <%= m.status %> data-date="" class="timer_task" ></div>
+					<% end %>
+				</td>
+				<% if m.status == "incomplete" %>
+				<td><button data-checkoff= <%= m.id %> class="btn btn-primary checkoffButton">Done</button></td>
+				<% else %>
+				<td><button class="btn btn-success disabled checkoffButton">Complete!</button></td>
+
+				<% end %>
+			</tr>
+			<% end %>
+
+		</table>
+	</div>
+</div>
+
+<div class="actions">
+	<% if @incident.end_time.blank? %>
+	<%= f.submit :id => "update_incident_btn", :class=>"btn btn-primary" %>
+	<% else %>
+	<%= f.submit :id => "update_incident_btn", :class=>"btn btn-primary disabled" %>
+	<% end %>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+
+		    if($("#primary_search").attr("data-completed")=="incomplete" ){
+
+		    	$("#primary_search").css("display", "block");
+		    	$("#primary_search").TimeCircles({use_background:false, text_size: .1, time: {
+				Days: {color:"#ffffff" },
+				Hours: {color:"#ffffff"},
+				Minutes: {color:"#ffffff"},
+				Seconds: {color:"#ffffff"}
+			}}).addListener(
+			function(unit,value,total){
+                // console.log(total);
+                // console.log(ending);
+                if (total % 10 == 0 ){
+
+                    alert("Primary search has not been completed");
+                    //ajax call here to update when the timer restarted
+
+                }
+            }
+            );
+		    }
+
+		    if($("#primary_search").attr("data-completed")=="complete" && $("#secondary_search").attr("data-completed")=="incomplete"){
+
+		    	var time = $("#primary_search").attr("data-updated");
+
+		    	$("#secondary_search").attr("data-date",time);
+
+		    	$("#secondary_search").css("display", "block");
+		    	$("#secondary_search").TimeCircles({use_background:false, text_size: .1, time: {
+				Days: {color:"#ffffff" },
+				Hours: {color:"#ffffff"},
+				Minutes: {color:"#ffffff"},
+				Seconds: {color:"#ffffff"}
+			}}).addListener(
+			function(unit,value,total){
+                // console.log(total);
+                // console.log(ending);
+                if (total % 10 == 0 ){
+
+                    alert("Secondary search has not been completed");
+                    //ajax call here to update when the timer restarted
+
+                }
+            }
+            );
 
 
-		<script>
-			$(document).ready(function(){
-				var mySelected = $("#incident_battalion_id option:selected").val();
+		    }
+
+
+		$(".checkoffButton").click(function(e){
+			e.preventDefault();
+			var checkoff_id = $(this).attr("data-checkoff");
+			var that = this;
+
+			$.ajax({
+				type: "GET",
+				dataType: "json",
+				url: "/checkoff_incidents/"+checkoff_id+"/docheckoff",
+				success: function(data){
+					if(data.success == true){
+						// console.log(data);
+						$(that).removeClass("btn-primary");
+						$(that).addClass("btn-success");
+						$(that).text("Complete!");
+			        	$(that).attr("disabled",true);
+			        	if(data.name == "Primary Search"){
+			        		$("#primary_search").TimeCircles().destroy();
+			        		$("#primary_search").css("display","none");
+			        		$("#secondary_search").css("display","block");
+			        		$("#secondary_search").attr("data-date",data.updated);
+			        		$("#secondary_search").TimeCircles({use_background:false, text_size: .1, time: {
+								Days: {color:"#ffffff" },
+								Hours: {color:"#ffffff"},
+								Minutes: {color:"#ffffff"},
+								Seconds: {color:"#ffffff"}
+							}}).addListener(
+								function(unit,value,total){
+					                // console.log(total);
+					                // console.log(ending);
+					                if (total % 10 == 0 ){
+
+					                    alert("Secondary search has not been completed");
+					                    //ajax call here to update when the timer restarted
+
+					                }
+					            }
+            				);
+			        	}
+			        	if(data.name == "Secondary Search"){
+			        		$("#secondary_search").TimeCircles().destroy();
+			        		$("#secondary_search").css("display", "none");
+			        	}
+
+
+			        }else {
+			        	alert("failed to save");
+			        }
+			    }
+			})
+		});
+
+
+var mySelected = $("#incident_battalion_id option:selected").val();
 		$('.ApparatusSelect :not(option[data-battalion='+mySelected+'])').hide(); //hide appropriate options based on selected battalion
 
 		$("#incident_battalion_id").change(function(){
@@ -187,19 +337,18 @@
 		$('.ScenesContainer').on('cocoon:before-insert', function(e, insertedItem){
 
 			var insert = insertedItem[2];
+			var myTime = new Date();
+			var mysec = myTime.getMilliseconds().toString();
+			var mymilli = myTime.getSeconds().toString();
+			var rando = Math.floor((Math.random() * 10000)+1).toString();
 
-				var myTime = new Date();
-				var mysec = myTime.getMilliseconds().toString();
-				var mymilli = myTime.getSeconds().toString();
-				var rando = Math.floor((Math.random() * 10000)+1).toString();
 
+			$(insert).find(".toggle-head").attr("data-target", "#"+mysec+mymilli+rando);
+			$(insert).find(".toggle-head").closest('.panel-heading').next().attr("id",mysec+mymilli+rando);
 
-				$(insert).find(".toggle-head").attr("data-target", "#"+mysec+mymilli+rando);
-				$(insert).find(".toggle-head").closest('.panel-heading').next().attr("id",mysec+mymilli+rando);
+			$(insert).find(".toggle-head").closest('.panel-heading').next().addClass("in");
 
-				$(insert).find(".toggle-head").closest('.panel-heading').next().addClass("in");
-
-				$(insert).find(".toggle-head").addClass("collapsed");
+			$(insert).find(".toggle-head").addClass("collapsed");
 
 		});
 
@@ -235,21 +384,16 @@
 
 		$('.toggle-head').each(function(){
 
+			var myTime = new Date();
+			var mysec = myTime.getMilliseconds().toString();
+			var mymilli = myTime.getSeconds().toString();
+			var rando = Math.floor((Math.random() * 10000)+1).toString();
 
-				var myTime = new Date();
-				var mysec = myTime.getMilliseconds().toString();
-				var mymilli = myTime.getSeconds().toString();
-				var rando = Math.floor((Math.random() * 10000)+1).toString();
-
-				$(this).last().attr("data-target", "#"+mysec+mymilli+rando);
-				$(this).closest(".panel-heading").next().attr("id",mysec+mymilli+rando);
-				$(this).addClass("collapsed");
+			$(this).last().attr("data-target", "#"+mysec+mymilli+rando);
+			$(this).closest(".panel-heading").next().attr("id",mysec+mymilli+rando);
+			$(this).addClass("collapsed");
 			var exposureName = $(this).closest(".panel-heading").next().find(".exposureName").val();
 			$(this).text(exposureName);
-
-
-
-
 		});
 
 
@@ -260,6 +404,15 @@
 		$(".big-button").click(function(){
 			$(".big-button").removeClass("active");
 			$(this).addClass("active");
+			$("#update_incident_btn").show();
+
+		});
+
+		$("#incident_benchmarks_btn").click(function(){
+			$(".switchable").hide();
+			$("#update_incident_btn").hide();
+			$("#checkoff_incidents").show();
+
 		});
 
 
@@ -279,7 +432,7 @@
 			$(".switchable").hide();
 			$("#incidents_exposures").show();
 		});
-});
+	});
 </script>
 <% end %>
 

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Incident:</strong>
+  <%= @checkoff_incident.incident_id %>
+</p>
+
+<p>
+  <strong>Checkoff:</strong>
+  <%= @checkoff_incident.checkoff_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @checkoff_incident.status %>
+</p>
+
+<%= link_to 'Edit', edit_checkoff_incident_path(@checkoff_incident) %> |
+<%= link_to 'Back', checkoff_incidents_path %>

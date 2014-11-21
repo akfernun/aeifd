@@ -1,0 +1,29 @@
+<h1>Listing checkoff_incidents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Incident</th>
+      <th>Checkoff</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @checkoff_incidents.each do |checkoff_incident| %>
+      <tr>
+        <td><%= checkoff_incident.incident_id %></td>
+        <td><%= checkoff_incident.checkoff_id %></td>
+        <td><%= checkoff_incident.status %></td>
+        <td><%= link_to 'Show', checkoff_incident %></td>
+        <td><%= link_to 'Edit', edit_checkoff_incident_path(checkoff_incident) %></td>
+        <td><%= link_to 'Destroy', checkoff_incident, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Checkoff incident', new_checkoff_incident_path %>

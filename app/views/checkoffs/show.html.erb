@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @checkoff.name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @checkoff.type %>
+</p>
+
+<%= link_to 'Edit', edit_checkoff_path(@checkoff) %> |
+<%= link_to 'Back', checkoffs_path %>

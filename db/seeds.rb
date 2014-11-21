@@ -94,6 +94,34 @@ strat_string2.each do |s|
 	IncidentStrategy.create(name:s)
 end
 
+Checkoff.delete_all
+
+checkstring = "Primary Search
+Secondary Search
+All Clear
+Utilities Contacted
+Utilities Disconnected
+Safety Officer Arrived
+Fire Under Control
+";
+
+# typestring = "mayday
+# incident
+# ";
+
+checkstring2 = checkstring.split("\n")
+#typestring2 = typestring.split("\n")
+
+# typestring2.each do |m|
+# 	checkstring2.each do |n|
+
+
+# 	end
+# end
+
+checkstring2.each do |m|
+	Checkoff.create(name: m, checkofftype: "incident")
+end
 
 
 

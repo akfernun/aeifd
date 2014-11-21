@@ -92,6 +92,11 @@ class IncidentsController < ApplicationController
     @rit2 = IncidentAssignment.where(incident_id: @incident, asset_role_id: 5)
     @maydays = Mayday.where(incident_assignment_id: @incident.incident_assignments, end_time: nil)
 
+    @checkoffs = CheckoffIncident.where(incident_id: @incident.id);
+    @primary_search_status = @checkoffs[0].status;
+
+    logger.debug "this is the primary search stat #{@primary_search_status}"
+
   end
 
   # POST /incidents

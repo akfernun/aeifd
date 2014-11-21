@@ -1,0 +1,29 @@
+<%= form_for(@checkoff_incident) do |f| %>
+  <% if @checkoff_incident.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@checkoff_incident.errors.count, "error") %> prohibited this checkoff_incident from being saved:</h2>
+
+      <ul>
+      <% @checkoff_incident.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :incident_id %><br>
+    <%= f.number_field :incident_id %>
+  </div>
+  <div class="field">
+    <%= f.label :checkoff_id %><br>
+    <%= f.number_field :checkoff_id %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

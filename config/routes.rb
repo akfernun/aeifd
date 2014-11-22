@@ -12,8 +12,6 @@ Rails.application.routes.draw do
 
   resources :battalions
 
-  resources :timers
-
    # resources :tasks
 
 

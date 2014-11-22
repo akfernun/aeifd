@@ -42,7 +42,6 @@
 
 			<% if @incident.end_time.blank? %>
 			<%= link_to 'New Log Entry', new_incident_entry_path(@incident), :class=>'btn btn-primary btn-sm' %>
-			<%= link_to 'View Benchmarks'.html_safe, edit_incident_task_path(@incident,@task.id), :class => 'btn btn-primary btn-sm', :style => "color: white;"  %>
 
 			<%= link_to 'End Incident'.html_safe, endincident_path(@incident), :class => 'btn btn-danger btn-sm', :style => "color: white;", :id => "endincidentbutton"  %>
 			<% end %>
@@ -207,18 +206,17 @@
 		    if($("#primary_search").attr("data-completed")=="incomplete" ){
 
 		    	$("#primary_search").css("display", "block");
-		    	$("#primary_search").TimeCircles({use_background:false, text_size: .1, time: {
+		    	$("#primary_search").TimeCircles({use_background:false, text_size: .25, time: {
 				Days: {color:"#ffffff" },
 				Hours: {color:"#ffffff"},
 				Minutes: {color:"#ffffff"},
 				Seconds: {color:"#ffffff"}
 			}}).addListener(
 			function(unit,value,total){
-                // console.log(total);
-                // console.log(ending);
+
                 if (total % 10 == 0 ){
 
-                    alert("Primary search has not been completed");
+                    //alert("Primary search has not been completed");
                     //ajax call here to update when the timer restarted
 
                 }
@@ -233,7 +231,8 @@
 		    	$("#secondary_search").attr("data-date",time);
 
 		    	$("#secondary_search").css("display", "block");
-		    	$("#secondary_search").TimeCircles({use_background:false, text_size: .1, time: {
+		    	$("#secondary_search").TimeCircles().destroy();
+		    	$("#secondary_search").TimeCircles({use_background:false, text_size: .25, time: {
 				Days: {color:"#ffffff" },
 				Hours: {color:"#ffffff"},
 				Minutes: {color:"#ffffff"},
@@ -244,7 +243,7 @@
                 // console.log(ending);
                 if (total % 10 == 0 ){
 
-                    alert("Secondary search has not been completed");
+                    //alert("Secondary search has not been completed");
                     //ajax call here to update when the timer restarted
 
                 }
@@ -257,9 +256,10 @@
 
 		$(".checkoffButton").click(function(e){
 			e.preventDefault();
+			e.stopImmediatePropagation();
 			var checkoff_id = $(this).attr("data-checkoff");
 			var that = this;
-
+			// console.log(that);
 			$.ajax({
 				type: "GET",
 				dataType: "json",
@@ -276,7 +276,7 @@
 			        		$("#primary_search").css("display","none");
 			        		$("#secondary_search").css("display","block");
 			        		$("#secondary_search").attr("data-date",data.updated);
-			        		$("#secondary_search").TimeCircles({use_background:false, text_size: .1, time: {
+			        		$("#secondary_search").TimeCircles({use_background:false, text_size: .25, time: {
 								Days: {color:"#ffffff" },
 								Hours: {color:"#ffffff"},
 								Minutes: {color:"#ffffff"},
@@ -287,7 +287,7 @@
 					                // console.log(ending);
 					                if (total % 10 == 0 ){
 
-					                    alert("Secondary search has not been completed");
+					                    //alert("Secondary search has not been completed");
 					                    //ajax call here to update when the timer restarted
 
 					                }
@@ -306,6 +306,11 @@
 			    }
 			})
 		});
+
+
+
+
+	// THE SECTION BELOW WORKS WITH THE FILTERING BY BATTALION
 
 
 var mySelected = $("#incident_battalion_id option:selected").val();
@@ -378,6 +383,8 @@ var mySelected = $("#incident_battalion_id option:selected").val();
     			}
 
     		});
+
+
 
 		// EVERYTHING BELOW HANDLES PAGING AND NAVIGATION
 

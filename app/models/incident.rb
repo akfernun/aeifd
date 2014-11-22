@@ -28,9 +28,6 @@ class Incident < ActiveRecord::Base
     @entry = Entry.new(incident_id: self.id, name: "Incident: #{self.name} created. Strategy set to #{self.incident_strategy.name}")
     @entry.save
 
-    @task = Task.new(incident_id: self.id, primar_search:false, all_clear:false, utilities_contacted:false, safety_officer_arrived:false, utilities_disconnected:false, secondary_search:false, fire_under_control:false)
-    @task.save
-
     @incident_checkoffs = Checkoff.where(:checkofftype => "incident");
     @incident_checkoffs.each do |m|
       CheckoffIncident.create(incident_id:self.id, checkoff_id:m.id, status:"incomplete")

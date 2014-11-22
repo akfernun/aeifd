@@ -87,7 +87,7 @@ class IncidentsController < ApplicationController
 
   # GET /incidents/1/edit
   def edit
-    @task = @incident.task
+
     gon.incident= @incident
     @rit2 = IncidentAssignment.where(incident_id: @incident, asset_role_id: 5)
     @maydays = Mayday.where(incident_assignment_id: @incident.incident_assignments, end_time: nil)

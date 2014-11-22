@@ -95,7 +95,10 @@ class IncidentsController < ApplicationController
     @checkoffs = CheckoffIncident.where(incident_id: @incident.id);
     @primary_search_status = @checkoffs[0].status;
 
-    logger.debug "this is the primary search stat #{@primary_search_status}"
+    @active_incident_assignments = IncidentAssignment.where(:incident_id => @incident.id);
+    @active_exposure_assignments = SceneAssignment.where(:scene_id => @incident.scenes);
+
+    logger.debug "HERE ARE TEHE ACTIVE EXPOSURE ASSIGNMENTS #{@active_exposure_assignments}"
 
   end
 

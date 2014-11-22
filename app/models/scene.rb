@@ -20,6 +20,10 @@ class Scene < ActiveRecord::Base
    end
 
    def get_incident_id
-     @incident_id = self.incident.id
+    @incident_id = self.incident.id
+
+    if self.name.blank?
+      self.name = "Exposure"
+    end
    end
 end

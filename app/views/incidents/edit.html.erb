@@ -51,9 +51,6 @@
 	</div>
 </div>
 
-
-
-
 <div class="panel panel-primary">
 	<div class="panel-heading">
 		<h3 class="panel-title">Dashboard for <%= @incident.name %></h3>
@@ -72,6 +69,9 @@
 				</div>
 				<div class="btn-group" id="incident_benchmarks_btn" role="group">
 					<button type="button" class="btn btn-default big-button">Benchmarks</button>
+				</div>
+				<div class="btn-group" id="active_assets_btn" role="group">
+					<button type="button" class="btn btn-default big-button">Active Assets</button>
 				</div>
 			</div>
 
@@ -118,7 +118,7 @@
 -->
 <div class="panel panel-default switchable" id="incidents_assignments">
 	<div class="panel-body">
-		<div class="field form-group">
+		<div class="field form-group IncidentAssignmentContainer">
 
 			<%= f.fields_for :incident_assignments do |builder| %>
 			<%= render 'incident_assignment_fields',:f => builder, :locals => {:incident_assignment_id => 5 } %>  <!-- What is locals?? -->
@@ -189,6 +189,51 @@
 	</div>
 </div>
 
+<!-- ACTIVE ASSETS SECTION
+ -->
+
+ <div class="panel panel-default switchable" id="active_assets">
+	<div class="panel-body">
+		<table class="table">
+
+		<% if !@active_exposure_assignments.blank? or !@active_incident_assignments.blank? %>
+			<tr>
+				<th>Apparatus</th>
+				<th>Location</th>
+				<th>Floor</th>
+				<th>Role</th>
+				<th>Scope</th>
+			</tr>
+
+			<% @active_incident_assignments.each do |m| %>
+			<tr>
+				<td><%= m.asset.name %></td>
+				<td><%= m.location.name %></td>
+				<td><%= m.floor %></td>
+				<td><%= m.asset_role.name %></td>
+				<td>Incident Assignment</td>
+			</tr>
+			<% end %>
+
+			<% @active_exposure_assignments.each do |m|  %>
+			<tr>
+				<td><%= m.asset.name  %></td>
+				<td><%= m.location.name %></td>
+				<td><%= m.floor %></td>
+				<td><%= m.asset_role.name %></td>
+				<td>Exposure: <%= m.scene.name %> </td>
+			</tr>
+			<% end %>
+		<% else %>
+
+		<h2>No Active Assets</h2>
+
+		<% end %>
+
+
+		</table>
+	</div>
+</div>
 <div class="actions">
 	<% if @incident.end_time.blank? %>
 	<%= f.submit :id => "update_incident_btn", :class=>"btn btn-primary" %>
@@ -231,7 +276,7 @@
 		    	$("#secondary_search").attr("data-date",time);
 
 		    	$("#secondary_search").css("display", "block");
-		    	$("#secondary_search").TimeCircles().destroy();
+
 		    	$("#secondary_search").TimeCircles({use_background:false, text_size: .25, time: {
 				Days: {color:"#ffffff" },
 				Hours: {color:"#ffffff"},
@@ -339,6 +384,10 @@ var mySelected = $("#incident_battalion_id option:selected").val();
 
     		});
 
+
+
+		// THE CODE BELOW DEALS WITH THE ACCORDION SHIT FOR THE EXPOSURES
+
 		$('.ScenesContainer').on('cocoon:before-insert', function(e, insertedItem){
 
 			var insert = insertedItem[2];
@@ -346,6 +395,8 @@ var mySelected = $("#incident_battalion_id option:selected").val();
 			var mysec = myTime.getMilliseconds().toString();
 			var mymilli = myTime.getSeconds().toString();
 			var rando = Math.floor((Math.random() * 10000)+1).toString();
+
+			console.log(insert);
 
 
 			$(insert).find(".toggle-head").attr("data-target", "#"+mysec+mymilli+rando);
@@ -355,7 +406,39 @@ var mySelected = $("#incident_battalion_id option:selected").val();
 
 			$(insert).find(".toggle-head").addClass("collapsed");
 
+			console.log(insertedItem[4]);
+
+			$(insertedItem[4]).find(".exposureApparatusToggleHead").attr("data-target", "#"+mysec+mymilli+rando);
+			$(insertedItem[4]).find(".exposureApparatusToggleHead").closest('.panel-heading').next().attr("id",mysec+mymilli+rando);
+
+			$(insertedItem[4]).find(".exposureApparatusToggleHead").closest('.panel-heading').next().addClass("in");
+
+			$(insertedItem[4]).find(".exposureApparatusToggleHead").addClass("collapsed");
+
 		});
+
+		$('.IncidentAssignmentContainer').on('cocoon:before-insert', function(e, insertedItem){
+
+			var insert = insertedItem[2];
+			var myTime = new Date();
+			var mysec = myTime.getMilliseconds().toString();
+			var mymilli = myTime.getSeconds().toString();
+			var rando = Math.floor((Math.random() * 10000)+1).toString();
+
+
+			$(insert).find(".apparatusToggleHead").attr("data-target", "#"+mysec+mymilli+rando);
+			$(insert).find(".apparatusToggleHead").closest('.panel-heading').next().attr("id",mysec+mymilli+rando);
+
+			$(insert).find(".apparatusToggleHead").closest('.panel-heading').next().addClass("in");
+
+			$(insert).find(".apparatusToggleHead").addClass("collapsed");
+
+		});
+
+
+
+
+		// THE SECTION BELOW DEALS WITH ALL OF THE BATTALION FILTERING BULLSHIT
 
 		$('.ScenesContainer').on('cocoon:after-insert', function(e, insertedItem) {
 
@@ -384,8 +467,6 @@ var mySelected = $("#incident_battalion_id option:selected").val();
 
     		});
 
-
-
 		// EVERYTHING BELOW HANDLES PAGING AND NAVIGATION
 
 
@@ -401,6 +482,35 @@ var mySelected = $("#incident_battalion_id option:selected").val();
 			$(this).addClass("collapsed");
 			var exposureName = $(this).closest(".panel-heading").next().find(".exposureName").val();
 			$(this).text(exposureName);
+		});
+
+		$('.apparatusToggleHead').each(function(){
+
+			var myTime = new Date();
+			var mysec = myTime.getMilliseconds().toString();
+			var mymilli = myTime.getSeconds().toString();
+			var rando = Math.floor((Math.random() * 10000)+1).toString();
+
+			$(this).attr("data-target", "#"+mysec+mymilli+rando);
+			$(this).closest(".panel-heading").next().attr("id",mysec+mymilli+rando);
+			$(this).addClass("collapsed");
+			 var apparatusName = $(this).closest(".panel-heading").next().find(".ApparatusSelect option:selected").text();
+			 $(this).text(apparatusName);
+		});
+
+
+		$('.exposureApparatusToggleHead').each(function(){
+
+			var myTime = new Date();
+			var mysec = myTime.getMilliseconds().toString();
+			var mymilli = myTime.getSeconds().toString();
+			var rando = Math.floor((Math.random() * 10000)+1).toString();
+
+			$(this).attr("data-target", "#"+mysec+mymilli+rando);
+			$(this).closest(".panel-heading").next().attr("id",mysec+mymilli+rando);
+			$(this).addClass("collapsed");
+			 var apparatusName = $(this).closest(".panel-heading").next().find(".SceneApparatusSelect option:selected").text();
+			 $(this).text(apparatusName);
 		});
 
 
@@ -419,6 +529,13 @@ var mySelected = $("#incident_battalion_id option:selected").val();
 			$(".switchable").hide();
 			$("#update_incident_btn").hide();
 			$("#checkoff_incidents").show();
+
+		});
+
+		$("#active_assets_btn").click(function(){
+			$(".switchable").hide();
+			$("#update_incident_btn").hide();
+			$("#active_assets").show();
 
 		});
 

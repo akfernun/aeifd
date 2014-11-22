@@ -4,7 +4,7 @@
         <div class="panel-heading">
         <div class="row">
           <div class="col-sm-9">
-          <h3 class="panel-title" style="color:#444">Apparatus</h3>
+          <h3 class="panel-title apparatusToggleHead" data-toggle="collapse" style="color:#444">Apparatus</h3>
         </div>
           <div class="col-sm-3">
              <% if !@incident.id.blank?  %>
@@ -19,7 +19,7 @@
 
 
         </div>
-        <div class="panel-body">
+        <div class="panel-body newApparatus collapse">
           <div class="field form-group">
             <%= f.label :asset, "Apparatus", class: 'col-sm-3 control-label' %>
             <div class="col-sm-9">

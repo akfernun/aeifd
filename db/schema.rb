@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120205026) do
+ActiveRecord::Schema.define(version: 20141124190521) do
 
   create_table "asset_roles", force: true do |t|
     t.string   "name"
@@ -34,6 +34,14 @@ ActiveRecord::Schema.define(version: 20141120205026) do
 
   create_table "checkoff_incidents", force: true do |t|
     t.integer  "incident_id"
+    t.integer  "checkoff_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "checkoff_maydays", force: true do |t|
+    t.integer  "mayday_id"
     t.integer  "checkoff_id"
     t.string   "status"
     t.datetime "created_at"
@@ -129,32 +137,6 @@ ActiveRecord::Schema.define(version: 20141120205026) do
     t.integer  "scene_type_id"
     t.integer  "battalion_id"
     t.integer  "incident_strategy_id"
-  end
-
-  create_table "tasks", force: true do |t|
-    t.boolean  "primar_search"
-    t.boolean  "all_clear"
-    t.boolean  "utilities_contacted"
-    t.boolean  "safety_officer_arrived"
-    t.boolean  "utilities_disconnected"
-    t.boolean  "secondary_search"
-    t.boolean  "fire_under_control"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "incident_id"
-  end
-
-  create_table "timers", force: true do |t|
-    t.datetime "primary_search"
-    t.datetime "all_clear"
-    t.datetime "utilities_contacted"
-    t.datetime "safety_officer_arrived"
-    t.datetime "utilities_disconnected"
-    t.datetime "secondary_search"
-    t.datetime "fire_under_control"
-    t.integer  "incident_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
 end

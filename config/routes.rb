@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :checkoff_maydays
+
   resources :checkoff_incidents
 
   resources :checkoffs

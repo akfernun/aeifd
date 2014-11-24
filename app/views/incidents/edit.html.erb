@@ -73,11 +73,26 @@
 				<div class="btn-group" id="active_assets_btn" role="group">
 					<button type="button" class="btn btn-default big-button">Active Assets</button>
 				</div>
+				<div class="btn-group" id="geo_map_btn" role="group">
+					<button type="button" class="btn btn-default big-button">Map</button>
+				</div>
+
 			</div>
 
-			<% @maydays.each do |m| %>
-			<%= link_to "#{m.name}", edit_mayday_path(m.id), :class => "btn btn-default btn-sm" %>
-			<% end %> <!-- THIS IS IMPORTANT SHIT SO KEEP TRACK OF IT -->
+
+			<% if !@maydays.blank? %>
+				<div class="dropdown">
+					<button style="width:100%" class="btn btn-default big-button dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+					Maydays
+						<span class="caret"></span>
+					</button>
+					<ul style="width:100%" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+						<% @maydays.each do |m| %>
+							<li role="presentation"><%= link_to "#{m.name}", edit_mayday_path(m.id), :role => "menuitem" %></li>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
 		</div>
 		<div class="col-lg-9">
 			<div class="panel panel-default switchable" id="incident_info">
@@ -234,6 +249,17 @@
 		</table>
 	</div>
 </div>
+
+<!-- ALL OF THE BELOW DEALS WITH GEOCODING -->
+
+<div class="panel panel-default switchable" id="geo_map">
+	<div class="panel-body" id="geo_map2"></div>
+</div>
+
+
+
+
+
 <div class="actions">
 	<% if @incident.end_time.blank? %>
 	<%= f.submit :id => "update_incident_btn", :class=>"btn btn-primary" %>
@@ -396,7 +422,7 @@ var mySelected = $("#incident_battalion_id option:selected").val();
 			var mymilli = myTime.getSeconds().toString();
 			var rando = Math.floor((Math.random() * 10000)+1).toString();
 
-			console.log(insert);
+			// console.log(insert);
 
 
 			$(insert).find(".toggle-head").attr("data-target", "#"+mysec+mymilli+rando);
@@ -556,6 +582,48 @@ var mySelected = $("#incident_battalion_id option:selected").val();
 			$(".switchable").hide();
 			$("#incidents_exposures").show();
 		});
+
+		$("#geo_map_btn").click(function(){
+			$(".switchable").hide();
+			$("#geo_map").show();
+			$("#update_incident_btn").hide();
+
+
+			if(navigator.geolocation){
+				navigator.geolocation.getCurrentPosition(showPosition);
+			}
+		});
+
+
+
+		// EVERYTHING BELOW DEALS WITH GEOLOCATION
+
+
+		function showPosition(position){
+
+			lat = position.coords.latitude;
+    		lon = position.coords.longitude;
+    		latlon = new google.maps.LatLng(lat, lon)
+
+
+    		var myOptions = {
+    			center: latlon, zoom:19,
+
+    		}
+
+    		var map = new google.maps.Map(document.getElementById("geo_map2"), myOptions);
+    		var marker = new google.maps.Marker({position:latlon,map:map,title:"Current Location"});
+
+
+	        mapholder = document.getElementById('geo_map2')
+    		mapholder.style.height = '600px';
+    		mapholder.style.width = '100%';
+
+		}
+
+
+
+
 	});
 </script>
 <% end %>

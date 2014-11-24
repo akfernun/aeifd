@@ -2,6 +2,8 @@ class Mayday < ActiveRecord::Base
 	belongs_to :incident_assignment
 	has_many :mayday_assignments
 	has_many :assets, :through =>  :mayday_assignments
+  has_many :checkoff_maydays
+  has_many :checkoffs, :through => :checkoff_maydays
 
 	after_create :create_action
 	after_update :update_action

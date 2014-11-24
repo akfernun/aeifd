@@ -105,24 +105,22 @@ Safety Officer Arrived
 Fire Under Control
 ";
 
-# typestring = "mayday
-# incident
-# ";
+maydaycheck = "Acknowledge mayday
+Assign XO as RIT Sector
+Sound Hi/Low Tones
+Emergency Radio Traffic Only
+";
+
 
 checkstring2 = checkstring.split("\n")
-#typestring2 = typestring.split("\n")
-
-# typestring2.each do |m|
-# 	checkstring2.each do |n|
+maydaycheck2 = maydaycheck.split("\n")
 
 
-# 	end
-# end
-
-checkstring2.each do |m|
-	Checkoff.create(name: m, checkofftype: "incident")
+checkstring2.each do |n|
+	Checkoff.create(name: n, checkofftype: "incident")
 end
-
-
+maydaycheck2.each do |n|
+	Checkoff.create(name: n, checkofftype: "mayday")
+end
 
 

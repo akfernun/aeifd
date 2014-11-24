@@ -13,7 +13,7 @@
     <% @checkoffs.each do |checkoff| %>
       <tr>
         <td><%= checkoff.name %></td>
-        <td><%= checkoff.type %></td>
+        <td><%= checkoff.checkofftype %></td>
         <td><%= link_to 'Show', checkoff %></td>
         <td><%= link_to 'Edit', edit_checkoff_path(checkoff) %></td>
         <td><%= link_to 'Destroy', checkoff, method: :delete, data: { confirm: 'Are you sure?' } %></td>

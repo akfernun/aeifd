@@ -16,6 +16,7 @@ gem 'jquery-countdown-rails'
 gem 'gon'
 gem 'jquery-turbolinks'
 #gem 'pg'
+gem 'geocoder'
 
 
 

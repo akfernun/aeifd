@@ -1,0 +1,29 @@
+<h1>Listing checkoff_maydays</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mayday</th>
+      <th>Checkoff</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @checkoff_maydays.each do |checkoff_mayday| %>
+      <tr>
+        <td><%= checkoff_mayday.mayday_id %></td>
+        <td><%= checkoff_mayday.checkoff_id %></td>
+        <td><%= checkoff_mayday.status %></td>
+        <td><%= link_to 'Show', checkoff_mayday %></td>
+        <td><%= link_to 'Edit', edit_checkoff_mayday_path(checkoff_mayday) %></td>
+        <td><%= link_to 'Destroy', checkoff_mayday, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Checkoff mayday', new_checkoff_mayday_path %>

@@ -14,9 +14,12 @@ class Mayday < ActiveRecord::Base
  def create_action
  	get_incident_assignment = IncidentAssignment.find(self.incident_assignment_id)
  	rit = IncidentAssignment.where(incident_id: get_incident_assignment.incident_id, asset_role_id: 5  )
- 	#logger.debug "************************************************#{rit[0].asset.name}"
     @entry = Entry.new(incident_id: get_incident_assignment.incident_id, name: "Mayday Created.  RIT Team - #{rit[0].asset.name} - has responded to a Mayday for #{get_incident_assignment.asset.name}")
     @entry.save
+  @checkoffs = Checkoff.where(checkofftype: "mayday")
+    @checkoffs.each do |c|
+      CheckoffMayday.create(mayday_id:self.id, checkoff_id:c.id, status:"incomplete")
+    end
   end
 
   def update_action

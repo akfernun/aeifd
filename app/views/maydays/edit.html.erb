@@ -36,10 +36,78 @@
 
   <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">Mayday</h3>
+        <h3 class="panel-title">Dashboard for <%= @mayday.name %></h3>
       </div>
       <div class="panel-body">
-        <div class="col-sm-6">
+          <div class="col-lg-3" style="padding:0!important;">
+            <div class="btn-group-vertical" style="width:100%;"  role="group">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default big-button" id="assignments_btn">Assignments</button>
+            </div>
+            <div class="btn-group" id="incident_info_btn" role="group">
+              <button type="button" class="btn btn-default big-button">Information</button>
+            </div>
+            <div class="btn-group" id="incident_benchmarks_btn" role="group">
+              <button type="button" class="btn btn-default big-button">Benchmarks</button>
+            </div>
+            <div class="btn-group" id="active_assets_btn" role="group">
+              <button type="button" class="btn btn-default big-button">Active Assets</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Assignments Panel -->
+
+        <div class="col-lg-9">
+          <div class="panel panel-default switchable" id="incident_info">
+            <div class="panel-body">
+              <div class="field form-group">
+                  <%= f.label :code, "Code", class: 'col-sm-3 control-label' %>
+
+                <div class="col-sm-9">
+                    <%= f.select :code, [ '700', '701', '702' ], {}, {class: "form-control"} %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!-- Benchmarks Panel -->
+
+        <div class="panel panel-default switchable" id="checkoff_incidents">
+          <div class="panel-body">
+            <table class="table">
+              <tr>
+                <th>Name</th>
+                <th>Button</th>
+              </tr>
+              
+              <% @checkoffs.each do |m| %>
+              <tr>
+                <td><%= m.checkoff.name %></td>
+  
+                <% if m.status == "incomplete" %>
+                <td><button data-checkoff= <%= m.id %> class="btn btn-primary checkoffButton">Done</button></td>
+                <% else %>
+                <td><button class="btn btn-success disabled checkoffButton">Complete!</button></td>
+
+                <% end %>
+              </tr>
+              <% end %>
+
+            </table>
+          </div>
+        </div>
+  
+
+
+          <div class="actions">
+            <%= f.submit :class=>"btn btn-primary" %>
+          </div>
+        </div>
+
+
+
+        <!-- <div class="col-sm-6">
           <div class="field form-group">
               <%= f.label :code, "Code", class: 'col-sm-3 control-label' %>
 
@@ -53,14 +121,52 @@
           <div class="field form-group">
 
             <%= f.fields_for :mayday_assignments do |builder| %>
-              <%= render 'mayday_assignment_fields',:f => builder %>  <!-- What is locals?? -->
+              <%= render 'mayday_assignment_fields',:f => builder %> 
               <% end %>
 
               <%= link_to_add_association 'Add Apparatus', f, :mayday_assignments, :id =>"AddAppLink", :class => "btn btn-default form-control" %>
           </div>
-        </div>
-        <div class="actions">
-          <%= f.submit :class=>"btn btn-primary" %>
-        </div>
+        </div> -->
+
   </div>
+
+
+  <script>
+
+
+
+
+$(document).ready(function(){
+
+    $(".checkoffButton").click(function(e){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      var checkoff_id = $(this).attr("data-checkoff");
+      var that = this;
+      // console.log(that);
+      $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "/checkoff_maydays/"+checkoff_id+"/docheckoff",
+        success: function(data){
+          if(data.success == true){
+            // console.log(data);
+            $(that).removeClass("btn-primary");
+            $(that).addClass("btn-success");
+            $(that).text("Complete!");
+                $(that).attr("disabled",true);
+          
+              }else {
+                alert("failed to save");
+              }
+          }
+      })
+    });
+
+
+});
+
+
+
+  </script>
 <% end %>

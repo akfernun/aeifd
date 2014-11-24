@@ -22,7 +22,7 @@ class MaydaysController < ApplicationController
   # GET /maydays/1/edit
   def edit
     @incident = IncidentAssignment.find(@mayday.incident_assignment_id).incident_id
-
+    @checkoffs = CheckoffMayday.where(mayday_id: @mayday)
   end
 
   def endmayday

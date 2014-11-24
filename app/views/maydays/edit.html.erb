@@ -1,9 +1,9 @@
 <% if notice %>
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <span id="notice"><%= notice %></span>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <span id="notice"><%= notice %></span>
   </div>
+</div>
 <% end %>
 <div class="row">
 	<div class="col-lg-5">
@@ -12,98 +12,106 @@
 
 	<div class="col-lg-7">
     <div class="col-sm-2"></div>
-      <div class="col-sm-10" style="margin:20px 0 0 0; text-align:right">
-        <%= link_to 'End Mayday'.html_safe, endmayday_path(@mayday), :class => 'btn btn-danger btn-sm', :style => "color: white;", :id => "endmaydaybutton"  %>
-    		<%#= link_to 'View Mayday Log', @mayday, :class => "btn btn-primary btn-sm" %> 
-    		<%= link_to 'Back to Incident', edit_incident_path(@incident), :class => "btn btn-primary btn-sm" %>
-      </div>
-	</div>
+    <div class="col-sm-10" style="margin:20px 0 0 0; text-align:right">
+      <%= link_to 'End Mayday'.html_safe, endmayday_path(@mayday), :class => 'btn btn-danger btn-sm', :style => "color: white;", :id => "endmaydaybutton"  %>
+      <%#= link_to 'View Mayday Log', @mayday, :class => "btn btn-primary btn-sm" %>
+      <%= link_to 'Back to Incident', edit_incident_path(@incident), :class => "btn btn-primary btn-sm" %>
+    </div>
+  </div>
 </div>
 
 <%= form_for(@mayday) do |f| %>
-  <% if @mayday.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@mayday.errors.count, "error") %> prohibited this mayday from being saved:</h2>
+<% if @mayday.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@mayday.errors.count, "error") %> prohibited this mayday from being saved:</h2>
 
-      <ul>
-      <% @mayday.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @mayday.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
 
-  <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">Dashboard for <%= @mayday.name %></h3>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Dashboard for <%= @mayday.name %></h3>
+  </div>
+  <div class="panel-body">
+    <div class="col-lg-3" style="padding:0!important;">
+      <div class="btn-group-vertical" style="width:100%;"  role="group">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default big-button" id="assignments_btn">Assignments</button>
+        </div>
+        <div class="btn-group" id="incident_info_btn" role="group">
+          <button type="button" class="btn btn-default big-button">Information</button>
+        </div>
+        <div class="btn-group" id="incident_benchmarks_btn" role="group">
+          <button type="button" class="btn btn-default big-button">Benchmarks</button>
+        </div>
+        <div class="btn-group" id="active_assets_btn" role="group">
+          <button type="button" class="btn btn-default big-button">Active Assets</button>
+        </div>
       </div>
-      <div class="panel-body">
-          <div class="col-lg-3" style="padding:0!important;">
-            <div class="btn-group-vertical" style="width:100%;"  role="group">
-            <div class="btn-group" role="group">
-              <button type="button" class="btn btn-default big-button" id="assignments_btn">Assignments</button>
-            </div>
-            <div class="btn-group" id="incident_info_btn" role="group">
-              <button type="button" class="btn btn-default big-button">Information</button>
-            </div>
-            <div class="btn-group" id="incident_benchmarks_btn" role="group">
-              <button type="button" class="btn btn-default big-button">Benchmarks</button>
-            </div>
-            <div class="btn-group" id="active_assets_btn" role="group">
-              <button type="button" class="btn btn-default big-button">Active Assets</button>
+    </div>
+
+    <!-- Assignments Panel -->
+
+    <div class="col-lg-9">
+      <div class="panel panel-default switchable" id="incident_info">
+        <div class="panel-body">
+          <div class="field form-group">
+            <%= f.label :code, "Code", class: 'col-sm-3 control-label' %>
+
+            <div class="col-sm-9">
+              <%= f.select :code, [ '700', '701', '702' ], {}, {class: "form-control"} %>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Assignments Panel -->
+      <!-- Benchmarks Panel -->
 
-        <div class="col-lg-9">
-          <div class="panel panel-default switchable" id="incident_info">
-            <div class="panel-body">
-              <div class="field form-group">
-                  <%= f.label :code, "Code", class: 'col-sm-3 control-label' %>
+      <div class="panel panel-default switchable" id="checkoff_incidents">
+        <div class="panel-body">
+          <table class="table">
+            <tr>
+              <th>Name</th>
+              <th>Button</th>
+            </tr>
 
-                <div class="col-sm-9">
-                    <%= f.select :code, [ '700', '701', '702' ], {}, {class: "form-control"} %>
-                </div>
-              </div>
-            </div>
-          </div>
+            <% @checkoffs.each do |m| %>
+            <tr>
+              <td><%= m.checkoff.name %></td>
 
-        <!-- Benchmarks Panel -->
+              <% if m.status == "incomplete" %>
+              <td><button data-checkoff= <%= m.id %> class="btn btn-primary checkoffButton">Done</button></td>
+              <% else %>
+              <td><button class="btn btn-success disabled checkoffButton">Complete!</button></td>
 
-        <div class="panel panel-default switchable" id="checkoff_incidents">
-          <div class="panel-body">
-            <table class="table">
-              <tr>
-                <th>Name</th>
-                <th>Button</th>
-              </tr>
-              
-              <% @checkoffs.each do |m| %>
-              <tr>
-                <td><%= m.checkoff.name %></td>
-  
-                <% if m.status == "incomplete" %>
-                <td><button data-checkoff= <%= m.id %> class="btn btn-primary checkoffButton">Done</button></td>
-                <% else %>
-                <td><button class="btn btn-success disabled checkoffButton">Complete!</button></td>
-
-                <% end %>
-              </tr>
               <% end %>
+            </tr>
+            <% end %>
 
-            </table>
-          </div>
+          </table>
         </div>
-  
+      </div>
+
+<!--         ACTIVE ASSETS SECTION
+-->
+<div class="panel panel-default switchable" id="active_assets">
+  <div class="panel-body">
+  <h2>No Active Assets</h2>
+  </div>
+</div>
 
 
-          <div class="actions">
-            <%= f.submit :class=>"btn btn-primary" %>
-          </div>
-        </div>
+
+<div class="actions">
+  <%= f.submit :id => "update_incident_btn", :class=>"btn btn-primary" %>
+</div>
+</div>
 
 
 
@@ -121,52 +129,97 @@
           <div class="field form-group">
 
             <%= f.fields_for :mayday_assignments do |builder| %>
-              <%= render 'mayday_assignment_fields',:f => builder %> 
+              <%= render 'mayday_assignment_fields',:f => builder %>
               <% end %>
 
               <%= link_to_add_association 'Add Apparatus', f, :mayday_assignments, :id =>"AddAppLink", :class => "btn btn-default form-control" %>
           </div>
         </div> -->
 
-  </div>
+      </div>
 
 
-  <script>
+      <script>
 
 
 
 
-$(document).ready(function(){
+        $(document).ready(function(){
 
-    $(".checkoffButton").click(function(e){
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      var checkoff_id = $(this).attr("data-checkoff");
-      var that = this;
+          $(".checkoffButton").click(function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            var checkoff_id = $(this).attr("data-checkoff");
+            var that = this;
       // console.log(that);
       $.ajax({
         type: "GET",
         dataType: "json",
-        url: "/checkoff_maydays/"+checkoff_id+"/docheckoff",
+        url: "/checkoff_maydays/"+checkoff_id+"/domaydaycheckoff",
         success: function(data){
-          if(data.success == true){
-            // console.log(data);
-            $(that).removeClass("btn-primary");
-            $(that).addClass("btn-success");
-            $(that).text("Complete!");
-                $(that).attr("disabled",true);
-          
-              }else {
-                alert("failed to save");
-              }
-          }
-      })
+         console.log(data);
+         if(data.success == true){
+
+          $(that).removeClass("btn-primary");
+          $(that).addClass("btn-success");
+          $(that).text("Complete!");
+          $(that).attr("disabled",true);
+
+        }else {
+          alert("failed to save");
+        }
+      }
+    })
     });
 
+          $(".switchable").hide();
+          $("#incidents_assignments").show();
+          $("#assignments_btn").addClass("active");
 
-});
+          $(".big-button").click(function(){
+            $(".big-button").removeClass("active");
+            $(this).addClass("active");
+            $("#update_incident_btn").show();
+
+          });
+
+          $("#incident_benchmarks_btn").click(function(){
+            $(".switchable").hide();
+            $("#update_incident_btn").hide();
+            $("#checkoff_incidents").show();
+
+          });
+
+          $("#active_assets_btn").click(function(){
+            $(".switchable").hide();
+            $("#update_incident_btn").hide();
+            $("#active_assets").show();
+
+          });
+
+
+          $("#incident_info_btn").click(function(){
+            $(".switchable").hide();
+            $("#incident_info").show();
+
+          });
+
+          $("#assignments_btn").click(function(){
+
+            $(".switchable").hide();
+            $("#incidents_assignments").show();
+          });
+
+          $("#incidents_exposures_btn").click(function(){
+            $(".switchable").hide();
+            $("#incidents_exposures").show();
+          });
 
 
 
-  </script>
-<% end %>
+        });
+
+
+
+      </script>
+      <% end %>

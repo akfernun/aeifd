@@ -1,5 +1,5 @@
 class CheckoffMaydaysController < ApplicationController
-  before_action :set_checkoff_mayday, only: [:show, :edit, :update, :destroy]
+  before_action :set_checkoff_mayday, only: [:domaydaycheckoff,:show, :edit, :update, :destroy]
 
   # GET /checkoff_maydays
   # GET /checkoff_maydays.json
@@ -19,6 +19,26 @@ class CheckoffMaydaysController < ApplicationController
 
   # GET /checkoff_maydays/1/edit
   def edit
+  end
+
+
+  def domaydaycheckoff
+
+    respond_to do |format|
+
+      if @checkoff_mayday.update_attribute(:status, "complete")
+
+        myreturn = {:success => true, :name => @checkoff_mayday.checkoff.name}.to_json
+
+          format.json { render json: myreturn }
+      else
+        myreturn = {:success => false, :name => @checkoff_mayday.checkoff.name}.to_json
+
+        format.json {render json: myreturn}
+
+
+      end
+    end
   end
 
   # POST /checkoff_maydays

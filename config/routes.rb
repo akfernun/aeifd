@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   get 'incidents/:id/endincident', to: 'incidents#endincident', :as => "endincident"
   get 'maydays/:id/endmayday', to: 'maydays#endmayday', :as => "endmayday"
   get 'checkoff_incidents/:id/docheckoff', to: 'checkoff_incidents#docheckoff', :as => "docheckoff"
+  get 'checkoff_maydays/:id/domaydaycheckoff', to: 'checkoff_maydays#domaydaycheckoff', :as => "domaydaycheckoff"
 
   # Example of regular route:
     #get 'measures/complete' => 'measure#complete'
